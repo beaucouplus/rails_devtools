@@ -1,0 +1,19 @@
+# frozen_string_literal: true
+
+module Devtools
+  module ImageAssets
+    class JsbundlingRailsConfig
+      def paths
+        [Rails.root.join("app/javascript").to_s]
+      end
+
+      def helper_snippet
+        "image_tag"
+      end
+
+      def implicit_path
+        "images/"
+      end
+    end
+  end
+end
