@@ -2,7 +2,7 @@
 
 module Devtools
   module Components
-    class Ui::Drawer < ApplicationComponent
+    class Ui::Drawer < Components::ApplicationComponent
       def initialize(id:, direction: "left", classes: "", &block)
         @id = id
         @direction = direction

@@ -2,7 +2,7 @@
 
 module Devtools
   module Components
-    class PageContent < ApplicationComponent
+    class PageContent < Components::ApplicationComponent
       def view_template(&)
         turbo_frame_tag("page_content", &)
       end

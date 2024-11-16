@@ -1,6 +1,6 @@
 module Devtools
   module Components
-    class Lucide::Base < ApplicationComponent
+    class Lucide::Base < Components::ApplicationComponent
       attr_reader :width, :height, :stroke
 
       def initialize(width: 24, height: 24)
@@ -9,7 +9,7 @@ module Devtools
       end
 
       def view_template
-        raise NotImplementedError, "You must implement the view_template method"
+        raise NotImplementedError, 'You must implement the view_template method'
       end
     end
   end
