@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Devtools
-  module ProjectRoutes
+  module Routes
     class Index < ApplicationView
       def initialize(form: nil, routes: [])
         @routes = routes
