@@ -19,7 +19,7 @@ module Devtools
         ) do
           div(class: 'card card-compact bg-white shadow-sm group-hover:bg-primary w-[150px]') do
             figure do
-              plain helpers.vite_image_tag(
+              image_tag(
                 @image_info.relative_asset_image_path,
                 class: 'card-image',
                 width: '150'

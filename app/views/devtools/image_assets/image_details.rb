@@ -9,7 +9,7 @@ module Devtools
     def view_template
       turbo_frame_tag('drawer_content', class: 'flex flex-col') do
         figure do
-          plain helpers.vite_image_tag(@image_info.relative_asset_image_path, width: '400')
+          image_tag(@image_info.relative_asset_image_path, width: '400')
         end
 
         div(class: 'mt-4') do
