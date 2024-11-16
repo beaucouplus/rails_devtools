@@ -14,33 +14,41 @@ module Devtools
         when :shakapacker
           ShapakapackerConfig.new
         else
-          raise "Unknown provider, please implement a new config"
+          raise 'Unknown provider, please implement a new config'
         end
       end
 
       def self.provider
-        return :vite_rails if defined?(ViteRails)
+        AssetProvider.new.find
+      end
+    end
+
+    class AssetProvider
+      def find
+        return :vite_rails if vite_rails?
         return :shakapacker if shakapacker?
         return :jsbundling_rails if jsbundling_rails?
         return :sprockets if sprockets?
+
         :unknown
       end
 
-      private
+      def vite_rails?
+        Rails.root.join('config/vite.json').exist?
+      end
 
       def shakapacker?
-        shakapacker_config_path = Rails.root.join("config", "shakapacker.yml")
+        shakapacker_config_path = Rails.root.join('config', 'shakapacker.yml')
         File.exist?(shakapacker_config_path)
       end
 
       def sprockets?
-        Rails.application.config.respond_to?(:assets) &&
-          Rails.application.config.assets.enabled
+        Rails.application.config.respond_to?(:assets)
       end
 
       def jsbundling_rails?
         Bundler.definition.dependencies.any? do |dep|
-          dep.name == "jsbundling-rails"
+          dep.name == 'jsbundling-rails'
         end
       end
     end
