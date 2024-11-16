@@ -1,4 +1,5 @@
 require 'vite_ruby'
+require 'fastimage'
 
 module Devtools
   class Engine < ::Rails::Engine
