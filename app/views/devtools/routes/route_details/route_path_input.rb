@@ -33,7 +33,7 @@ module Devtools
       private
 
       def input_value
-        "#{@prefix}#{@route.name}_#{@suffix}()"
+        "#{prefix}#{@route.name}_#{@suffix}()"
       end
 
       def prefix
