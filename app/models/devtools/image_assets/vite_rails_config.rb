@@ -3,6 +3,10 @@
 module Devtools
   module ImageAssets
     class ViteRailsConfig
+      def provider
+        :vite_rails
+      end
+
       def paths
         [Rails.root.join("app/frontend").to_s]
       end

@@ -3,6 +3,10 @@
 module Devtools
   module ImageAssets
     class SprocketConfig
+      def provider
+        :sprockets
+      end
+
       def paths
         Rails.application.config.assets.paths
       end

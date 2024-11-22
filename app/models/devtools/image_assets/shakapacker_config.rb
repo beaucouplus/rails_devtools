@@ -3,6 +3,10 @@
 module Devtools
   module ImageAssets
     class ShakapackerConfig
+      def provider
+        :shakapacker
+      end
+
       def paths
         return @paths if defined?(@paths)
 
@@ -21,10 +25,6 @@ module Devtools
       def implicit_path
         "images/"
       end
-    end
-
-    def method_type
-      :class_method if singleton_class_node.present?
     end
   end
 end

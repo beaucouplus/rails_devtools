@@ -4,7 +4,7 @@ module Devtools
   module ImageAssets
     class ImageInfo
       IMAGE_EXTENSIONS = Set[
-        ".jpg", ".jpeg",  # JPEG
+        ".jpg", ".jpeg", # JPEG
         ".png",          # PNG
         ".gif",          # GIF
         ".webp",         # WebP
@@ -63,6 +63,8 @@ module Devtools
       def height
         size[1]
       end
+
+      delegate :provider, to: :asset_config
 
       private
 

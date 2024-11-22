@@ -3,6 +3,10 @@
 module Devtools
   module ImageAssets
     class JsbundlingRailsConfig
+      def provider
+        :jsbundling_rails
+      end
+
       def paths
         [Rails.root.join("app/javascript").to_s]
       end
