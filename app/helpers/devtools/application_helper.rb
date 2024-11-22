@@ -1,5 +1,5 @@
-require 'vite_rails/version'
-require 'vite_rails/tag_helpers'
+require "vite_rails/version"
+require "vite_rails/tag_helpers"
 
 module Devtools
   module ApplicationHelper

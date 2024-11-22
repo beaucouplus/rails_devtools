@@ -14,7 +14,7 @@ module Devtools
         when :shakapacker
           ShapakapackerConfig.new
         else
-          raise 'Unknown provider, please implement a new config'
+          raise "Unknown provider, please implement a new config"
         end
       end
 
@@ -34,11 +34,11 @@ module Devtools
       end
 
       def vite_rails?
-        Rails.root.join('config/vite.json').exist?
+        Rails.root.join("config/vite.json").exist?
       end
 
       def shakapacker?
-        shakapacker_config_path = Rails.root.join('config', 'shakapacker.yml')
+        shakapacker_config_path = Rails.root.join("config", "shakapacker.yml")
         File.exist?(shakapacker_config_path)
       end
 
@@ -48,7 +48,7 @@ module Devtools
 
       def jsbundling_rails?
         Bundler.definition.dependencies.any? do |dep|
-          dep.name == 'jsbundling-rails'
+          dep.name == "jsbundling-rails"
         end
       end
     end

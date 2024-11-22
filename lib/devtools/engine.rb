@@ -1,5 +1,5 @@
-require 'vite_ruby'
-require 'fastimage'
+require "vite_ruby"
+require "fastimage"
 
 module Devtools
   class Engine < ::Rails::Engine
@@ -15,13 +15,13 @@ module Devtools
                               urls: ["/#{vite_ruby.config.public_output_dir}"],
                               root: root.join(vite_ruby.config.public_dir))
 
-    initializer 'vite_rails_engine.proxy' do |app|
+    initializer "vite_rails_engine.proxy" do |app|
       if vite_ruby.run_proxy?
         app.middleware.insert_before 0, ViteRuby::DevServerProxy, ssl_verify_none: true, vite_ruby: vite_ruby
       end
     end
 
-    initializer 'vite_rails_engine.logger' do
+    initializer "vite_rails_engine.logger" do
       config.after_initialize do
         vite_ruby.logger = Rails.logger
       end

@@ -9,7 +9,7 @@ module Devtools
       end
 
       def view_template
-        raise NotImplementedError, 'You must implement the view_template method'
+        raise NotImplementedError, "You must implement the view_template method"
       end
     end
   end
