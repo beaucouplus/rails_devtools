@@ -41,8 +41,9 @@ module Devtools
 
       found = nil
       Devtools::Engine.asset_config.paths.each do |path|
-        paths = Dir.glob("#{path}/**/*#{filename}*")
+        paths = Dir.glob("#{path}/images/**/*#{filename}*")
         found = paths.find { |path| File.file?(path) }
+
         break if found
       end
 
