@@ -53,7 +53,7 @@ module Devtools
         return @relative_asset_image_path if defined?(@relative_asset_image_path)
 
         matching_path = asset_config.paths.find { |asset_path| path.start_with?(asset_path) }
-        @relative_asset_image_path = path.gsub(matching_path + "/", "").gsub(asset_config.implicit_path, "")
+        @relative_asset_image_path = path.gsub(matching_path + "/", "").sub(asset_config.implicit_path, "")
       end
 
       def width
