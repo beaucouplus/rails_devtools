@@ -1,4 +1,5 @@
 require "fastimage"
+require "phlex-rails"
 
 module Devtools
   class Engine < ::Rails::Engine
