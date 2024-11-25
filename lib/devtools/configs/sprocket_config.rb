@@ -8,7 +8,7 @@ module Devtools
       end
 
       def paths
-        Rails.application.config.assets.paths
+        Rails.application.config.assets.paths.select { |p| p.to_s.end_with?("images") }
       end
 
       def helper_snippet
