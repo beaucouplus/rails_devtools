@@ -37,7 +37,7 @@ module Devtools
 
     def find_source_image(path)
       return nil unless image?(path)
-      filename = File.basename(path)
+      filename = CGI.unescape(File.basename(path))
 
       found = nil
       Devtools::Engine.asset_config.paths.each do |path|
