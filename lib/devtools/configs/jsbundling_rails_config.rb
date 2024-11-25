@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 module Devtools
-  module ImageAssets
-    class SprocketConfig
+  module Configs
+    class JsbundlingRailsConfig
       def provider
-        :sprockets
+        :jsbundling_rails
       end
 
       def paths
-        Rails.application.config.assets.paths
+        [Rails.root.join("app/javascript").to_s]
       end
 
       def helper_snippet

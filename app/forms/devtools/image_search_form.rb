@@ -9,7 +9,7 @@ module Devtools
     end
 
     def results
-      folders = ImageAssets::AssetConfig.find.paths
+      folders = Devtools::Engine.asset_config.paths
 
       images_by_folder = Hash.new { |hash, key| hash[key] = [] }
 

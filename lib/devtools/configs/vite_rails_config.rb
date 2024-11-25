@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
 module Devtools
-  module ImageAssets
-    class JsbundlingRailsConfig
+  module Configs
+    class ViteRailsConfig
       def provider
-        :jsbundling_rails
+        :vite_rails
       end
 
       def paths
-        [Rails.root.join("app/javascript").to_s]
+        [Rails.root.join("app/frontend").to_s]
       end
 
       def helper_snippet
-        "image_tag"
+        "vite_image_tag"
       end
 
       def implicit_path
-        "images/"
+        ""
       end
     end
   end

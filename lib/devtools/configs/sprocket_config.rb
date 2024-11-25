@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
 module Devtools
-  module ImageAssets
-    class ViteRailsConfig
+  module Configs
+    class SprocketConfig
       def provider
-        :vite_rails
+        :sprockets
       end
 
       def paths
-        [Rails.root.join("app/frontend").to_s]
+        Rails.application.config.assets.paths
       end
 
       def helper_snippet
-        "vite_image_tag"
+        "image_tag"
       end
 
       def implicit_path
-        ""
+        "images/"
       end
     end
   end

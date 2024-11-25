@@ -73,7 +73,7 @@ module Devtools
       end
 
       def asset_config
-        @asset_config ||= ImageAssets::AssetConfig.find
+        @asset_config ||= Devtools::Engine.asset_config
       end
     end
   end
