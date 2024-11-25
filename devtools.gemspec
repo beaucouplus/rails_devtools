@@ -29,7 +29,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "phlex-rails", ">= 1.1.2"
   spec.add_dependency "rails", ">= 7.1"
   spec.add_dependency "turbo-rails", ">= 2.0.0"
-  spec.add_dependency "vite_rails", "~> 3.0", ">= 3.0.17"
   spec.add_dependency "zeitwerk", ">= 2.6.12"
 
   spec.add_development_dependency "pry"

@@ -7,10 +7,6 @@ module Devtools
     include Phlex::Rails::Helpers::StripTags
     include Phlex::Rails::Helpers::JavascriptIncludeTag
 
-    register_output_helper :vite_javascript_tag
-    register_output_helper :vite_client_tag
-    register_output_helper :vite_stylesheet_tag
-
     def view_template(&block)
       doctype
 
@@ -26,9 +22,6 @@ module Devtools
           csrf_meta_tags
           csp_meta_tag
 
-          vite_client_tag
-          vite_javascript_tag "application"
-          vite_stylesheet_tag "application", data: { "turbo-track": "reload" }
         end
 
         body do
