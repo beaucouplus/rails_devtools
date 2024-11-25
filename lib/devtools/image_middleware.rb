@@ -40,10 +40,11 @@ module Devtools
       filename = CGI.unescape(File.basename(path))
 
       found = nil
-      Devtools::Engine.asset_config.paths.each do |path|
-        paths = Dir.glob("#{path}/images/**/*#{filename}*")
-        found = paths.find { |path| File.file?(path) }
+      config = Devtools::Engine.asset_config
 
+      config.paths.each do |path|
+        paths = Dir.glob("#{path}/**/*#{filename}*")
+        found = paths.find { |path| File.file?(path) }
         break if found
       end
 
