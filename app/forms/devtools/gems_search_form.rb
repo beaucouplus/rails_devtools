@@ -49,7 +49,7 @@ module Devtools
 
     def order(gems)
       gems.sort_by do |item|
-        [GROUP_PRIORITY[item.groups.join("-")], item.name]
+        [GROUP_PRIORITY.fetch(item.groups.join("-"), 5), item.name]
       end
     end
 
