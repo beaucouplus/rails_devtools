@@ -9,7 +9,7 @@ module Devtools
         @engine = engine
       end
 
-      delegate :controller, :action, :verb, :constraints, :endpoint, to: :@wrapped_route
+      delegate :controller, :action, :constraints, :endpoint, to: :@wrapped_route
 
       def segments
         @wrapped_route.parts.reject { |p| p == :format }
@@ -24,6 +24,10 @@ module Devtools
 
       def name
         @name ||= route_name
+      end
+
+      def verb
+        @wrapped_route.verb.presence || "ALL"
       end
 
       def redirection?
