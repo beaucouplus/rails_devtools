@@ -29,7 +29,6 @@ module Devtools
       else
         "images/"
       end
-
     end
 
     def vite_rails?
@@ -43,7 +42,7 @@ module Devtools
       Configs::ViteRailsConfig,
       Configs::JsbundlingRailsConfig,
       Configs::ShakapackerConfig
-    ]
+    ].freeze
 
     def list
       @list ||= CONFIGS.select { |config| config.new.used? }.map(&:new)
