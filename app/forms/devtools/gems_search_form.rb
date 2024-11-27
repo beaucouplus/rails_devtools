@@ -41,9 +41,10 @@ module Devtools
 
     GROUP_PRIORITY = {
       "default" => 0,
-      "development" => 1,
-      "development-test" => 2,
-      "test" => 3
+      "production" => 1,
+      "development" => 2,
+      "development-test" => 3,
+      "test" => 4
     }.freeze
 
     def order(gems)
