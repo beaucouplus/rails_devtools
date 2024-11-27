@@ -8,14 +8,13 @@ module Devtools
     end
 
     def show
-      found_route = Routes::ProjectRoute.find(
+      route = Routes::ProjectRoute.find(
         id: params[:id],
         controller: params[:route_controller],
         action: params[:route_action],
-        engine: params[:route_engine]
+        engine: params[:route_engine],
+        redirection: params[:redirection] == "true"
       )
-
-      route = ActionDispatch::Routing::RouteWrapper.new(found_route)
 
       render Routes::RouteDetails.new(
         route: Routes::RouteInfo.new(route, engine: params[:route_engine])

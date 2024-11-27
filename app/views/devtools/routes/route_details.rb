@@ -20,17 +20,34 @@ module Devtools
           open_link
           segments
           div(class: "mt-4 pt-4 border-t-2 border-base-300 mt-2 text-sm text-neutral") do
-            render Routes::RouteDetails::ControllerCard.new(
-              controller_info: @route.controller_info
-            )
+            controller_card
+            redirection_card
           end
-
           route_path_input
         end
       end
     end
 
     private
+
+    def redirection_card
+      return unless @route.redirection?
+
+      div(class: "card card-compact bg-base-100 text-sm w-full shadow-sm mb-4 border border-base-300") do
+        div(class: "card-body flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4") do
+          h3(class: "block text-lg font-bold mb-2") { "Redirection #{@route.redirection_info.status}" }
+          div(class: "text-sm text-neutral") { @route.redirection_info.block }
+        end
+      end
+    end
+
+    def controller_card
+      return if @route.redirection?
+
+      render Routes::RouteDetails::ControllerCard.new(
+        controller_info: @route.controller_info
+      )
+    end
 
     def engine_name
       return unless @route.engine_info.engine?

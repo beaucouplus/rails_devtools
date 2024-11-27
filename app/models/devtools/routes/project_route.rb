@@ -3,31 +3,46 @@
 module Devtools
   module Routes
     class ProjectRoute
-      def self.find(id:, controller:, action:, engine:)
+      def self.find(id:, controller:, action:, engine:, redirection: false)
         new(
           id: id,
           controller: controller,
           action: action,
-          engine: engine
+          engine: engine,
+          redirection: redirection
         ).find
       end
 
-      def initialize(id:, controller:, action:, engine:)
+      def initialize(id:, controller:, action:, engine:, redirection: false)
         @id = id
         @controller = controller
         @action = action
         @engine = engine
+        @redirection = redirection
       end
 
       def find
         route_engine.routes.routes.find do |r|
-          r.requirements[:action] == @action &&
-            r.requirements[:controller] == @controller &&
-            include_root?(r)
+          found_route = if redirection?
+            r.name == @id
+          else
+            find_by_requirements(r)
+          end
+
+          found_route && include_root?(r)
         end
       end
 
       private
+
+      def redirection?
+        @redirection
+      end
+
+      def find_by_requirements(route)
+        route.requirements[:action] == @action &&
+          route.requirements[:controller] == @controller
+      end
 
       def include_root?(route)
         return true if route.verb != "GET"

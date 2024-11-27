@@ -13,7 +13,8 @@ module Devtools
           @route.name,
           route_engine: @engine,
           route_controller: @route.controller,
-          route_action: @route.action
+          route_action: @route.action,
+          redirection: @route.redirection?
         ),
         data: { turbo_frame: "drawer_content", action: "click->checkbox#toggle" },
         class: "group flex w-full"
@@ -25,11 +26,7 @@ module Devtools
                 h2(class: "inline-flex card-title !mb-0 leading-none text-base items-center") do
                   "#{@route.name}_path"
                 end
-                unless @route.controller_info.action_exists?
-                  span(class: "text-error ml-1") do
-                    render Components::Lucide::TriangleAlert.new(width: 16, height: 16)
-                  end
-                end
+                no_matching_controller_alert
               end
               div(class: "flex gap-2 items-center justify-between sm:justify-normal") do
                 div(class: "truncate") { @route.path.gsub("(.:format)", "") }
@@ -42,5 +39,14 @@ module Devtools
     end
 
     private
+
+    def no_matching_controller_alert
+      return if @route.redirection?
+      return if @route.controller_info.action_exists?
+
+      span(class: "text-error ml-1") do
+        render Components::Lucide::TriangleAlert.new(width: 16, height: 16)
+      end
+    end
   end
 end

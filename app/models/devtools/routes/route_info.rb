@@ -3,12 +3,13 @@
 module Devtools
   module Routes
     class RouteInfo
-      def initialize(wrapped_route, engine: "Application")
-        @wrapped_route = wrapped_route
+      def initialize(route, engine: "Application")
+        @route = route
+        @wrapped_route = ActionDispatch::Routing::RouteWrapper.new(route)
         @engine = engine
       end
 
-      delegate :controller, :action, :verb, :constraints, to: :@wrapped_route
+      delegate :controller, :action, :verb, :constraints, :endpoint, to: :@wrapped_route
 
       def segments
         @wrapped_route.parts.reject { |p| p == :format }
@@ -23,6 +24,22 @@ module Devtools
 
       def name
         @name ||= route_name
+      end
+
+      def redirection?
+        @route.app&.app.respond_to?(:redirect?) && @route.app.app.redirect?
+      end
+
+      RedirectionInfo = Data.define(:status, :block)
+
+      def redirection_info
+        return unless redirection?
+        return @redirection_info if defined?(@redirection_info)
+
+        @redirection_info ||= RedirectionInfo.new(
+          status: @route.app.app.status,
+          block: @route.app.app.block
+        )
       end
 
       def path
@@ -41,6 +58,13 @@ module Devtools
 
         matching_route = engine_info.engine.routes.routes.find do |r|
           r.path.spec.to_s == @wrapped_route.path
+        end
+
+        if matching_route.name.blank?
+          return [
+            @wrapped_route.defaults[:controller],
+            @wrapped_route.defaults[:action]
+          ].join("_")
         end
 
         matching_route.name

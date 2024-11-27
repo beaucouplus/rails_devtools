@@ -11,18 +11,12 @@ module Devtools
     def results
       routes = []
       app_routes.each do |route|
-        routes << Routes::RouteInfo.new(
-          ActionDispatch::Routing::RouteWrapper.new(route),
-          engine: "Application"
-        )
+        routes << Routes::RouteInfo.new(route, engine: "Application")
       end
 
       engine_routes.each do |engine, engine_routes|
         engine_routes.each do |route|
-          routes << Routes::RouteInfo.new(
-            ActionDispatch::Routing::RouteWrapper.new(route),
-            engine: engine
-          )
+          routes << Routes::RouteInfo.new(route, engine: engine)
         end
       end
 
