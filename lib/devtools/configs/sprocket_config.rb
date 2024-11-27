@@ -11,12 +11,8 @@ module Devtools
         Rails.application.config.assets.paths.select { |p| p.to_s.end_with?("images") }
       end
 
-      def helper_snippet
-        "image_tag"
-      end
-
-      def implicit_path
-        "images/"
+      def used?
+        Rails.application.config.respond_to?(:assets)
       end
     end
   end

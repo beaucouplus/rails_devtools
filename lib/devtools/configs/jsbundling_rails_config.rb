@@ -11,12 +11,10 @@ module Devtools
         [Rails.root.join("app/javascript").to_s]
       end
 
-      def helper_snippet
-        "image_tag"
-      end
-
-      def implicit_path
-        "images/"
+      def used?
+        Bundler.definition.dependencies.any? do |dep|
+          dep.name == "jsbundling-rails"
+        end
       end
     end
   end

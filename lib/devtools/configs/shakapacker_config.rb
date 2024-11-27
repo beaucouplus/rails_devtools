@@ -18,12 +18,8 @@ module Devtools
         @paths = @paths.merge!(additional_paths).to_a
       end
 
-      def helper_snippet
-        "image_tag"
-      end
-
-      def implicit_path
-        "images/"
+      def used?
+        Rails.root.join("config", "shakapacker.yml").exist?
       end
     end
   end

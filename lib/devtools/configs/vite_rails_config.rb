@@ -11,12 +11,8 @@ module Devtools
         [Rails.root.join("app/frontend").to_s]
       end
 
-      def helper_snippet
-        "vite_image_tag"
-      end
-
-      def implicit_path
-        ""
+      def used?
+        Rails.root.join("config/vite.json").exist?
       end
     end
   end

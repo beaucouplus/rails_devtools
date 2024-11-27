@@ -3,51 +3,50 @@
 module Devtools
   class AssetConfig
     def self.find
-      case provider
-      when :sprockets
-        Configs::SprocketConfig.new
-      when :vite_rails
-        Configs::ViteRailsConfig.new
-      when :jsbundling_rails
-        Configs::JsbundlingRailsConfig.new
-      when :shakapacker
-        Configs::ShapakapackerConfig.new
+      providers = AssetProvider.new.list
+      new(providers)
+    end
+
+    def initialize(providers)
+      @providers = providers
+    end
+
+    def paths
+      @paths ||= @providers.flat_map(&:paths)
+    end
+
+    def helper_snippet
+      if vite_rails?
+        "vite_image_tag"
       else
-        raise "Unknown provider, please implement a new config"
+        "image_tag"
       end
     end
 
-    def self.provider
-      AssetProvider.new.find
+    def implicit_path
+      if vite_rails?
+        ""
+      else
+        "images/"
+      end
+
+    end
+
+    def vite_rails?
+      @providers.any? { |p| p.provider == :vite_rails }
     end
   end
 
   class AssetProvider
-    def find
-      return :vite_rails if vite_rails?
-      return :shakapacker if shakapacker?
-      return :jsbundling_rails if jsbundling_rails?
-      return :sprockets if sprockets?
+    CONFIGS = [
+      Configs::SprocketConfig,
+      Configs::ViteRailsConfig,
+      Configs::JsbundlingRailsConfig,
+      Configs::ShakapackerConfig
+    ]
 
-      :unknown
-    end
-
-    def vite_rails?
-      Rails.root.join("config/vite.json").exist?
-    end
-
-    def shakapacker?
-      Rails.root.join("config", "shakapacker.yml").exist?
-    end
-
-    def sprockets?
-      Rails.application.config.respond_to?(:assets)
-    end
-
-    def jsbundling_rails?
-      Bundler.definition.dependencies.any? do |dep|
-        dep.name == "jsbundling-rails"
-      end
+    def list
+      @list ||= CONFIGS.select { |config| config.new.used? }.map(&:new)
     end
   end
 end
