@@ -80,14 +80,5 @@ module Devtools
         }
       end
     end
-
-    def last_gemfile_commit
-      return @last_gemfile_commit if defined?(@last_gemfile_commit)
-
-      last_commit = `git log -n 1 --pretty=format:%H -- #{Rails.root.join("Gemfile")}`.strip
-      return if last_commit.empty?
-
-      @last_gemfile_commit = last_commit
-    end
   end
 end
