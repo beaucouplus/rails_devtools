@@ -55,7 +55,7 @@ module Devtools
 
       def card_class
         [
-          "card card-compact bg-base-100 text-sm w-full shadow-sm mb-4",
+          "card card-compact bg-white text-sm w-full shadow-sm mb-4",
           error? ? "border border-error" : "border border-base-300"
         ].compact.join(" ")
       end

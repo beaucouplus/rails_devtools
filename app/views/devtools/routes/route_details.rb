@@ -33,7 +33,7 @@ module Devtools
     def redirection_card
       return unless @route.redirection?
 
-      div(class: "card card-compact bg-base-100 text-sm w-full shadow-sm mb-4 border border-base-300") do
+      div(class: "card card-compact bg-white text-sm w-full shadow-sm mb-4 border border-base-300") do
         div(class: "card-body flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4") do
           h3(class: "block text-lg font-bold mb-2") { "Redirection #{@route.redirection_info.status}" }
           div(class: "text-sm text-neutral") { @route.redirection_info.block }
