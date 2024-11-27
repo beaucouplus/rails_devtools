@@ -26,6 +26,7 @@ module Devtools
                 h2(class: "inline-flex card-title !mb-0 leading-none text-base items-center") do
                   "#{@route.name}_path"
                 end
+                redirection_badge
                 no_matching_controller_alert
               end
               div(class: "flex gap-2 items-center justify-between sm:justify-normal") do
@@ -47,6 +48,12 @@ module Devtools
       span(class: "text-error ml-1") do
         render Components::Lucide::TriangleAlert.new(width: 16, height: 16)
       end
+    end
+
+    def redirection_badge
+      return unless @route.redirection?
+
+      span(class: "badge badge-sm badge-accent ml-1") { @route.redirection_info.status }
     end
   end
 end
