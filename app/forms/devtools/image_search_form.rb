@@ -12,9 +12,10 @@ module Devtools
       folders = Devtools::Engine.asset_config.paths
 
       images_by_folder = Hash.new { |hash, key| hash[key] = [] }
+      extensions = ImageMiddleware::IMAGE_EXTENSIONS.keys.map { |ext| ext.delete_prefix(".") }.join(",")
 
       folders.each do |dir|
-        Dir.glob("#{dir}/**/*#{@search}*").each do |path|
+        Dir.glob("#{dir}/**/*#{@search}*.{#{extensions}}").each do |path|
           image_info = ImageAssets::ImageInfo.new(path)
           next unless image_info.valid?
 
@@ -25,7 +26,5 @@ module Devtools
 
       images_by_folder
     end
-
-    private
   end
 end
