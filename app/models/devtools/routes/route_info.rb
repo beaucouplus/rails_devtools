@@ -27,11 +27,17 @@ module Devtools
       end
 
       def verb
+        return "?" if rack_app?
         @wrapped_route.verb.presence || "ALL"
       end
 
       def redirection?
         @route.app&.app.respond_to?(:redirect?) && @route.app.app.redirect?
+      end
+
+      def rack_app?
+        !redirection? && @route.app.app.respond_to?(:call) &&
+          !@route.app.app.is_a?(ActionDispatch::Routing::RouteSet)
       end
 
       RedirectionInfo = Data.define(:status, :block)

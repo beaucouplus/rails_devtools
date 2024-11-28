@@ -23,10 +23,10 @@ module Devtools
 
       def find
         route_engine.routes.routes.find do |r|
-          found_route = if redirection?
+          found_route = if redirection? || no_requirements_or_redirection?(r)
             r.name == @id
           else
-            find_by_requirements(r)
+            found_by_requirements?(r)
           end
 
           found_route && include_root?(r)
@@ -39,7 +39,13 @@ module Devtools
         @redirection
       end
 
-      def find_by_requirements(route)
+      def no_requirements_or_redirection?(route)
+        !redirection? && !found_by_requirements?(route)
+      end
+
+      def found_by_requirements?(route)
+        return false if !route.requirements.key?(:controller) || !route.requirements.key?(:action)
+
         route.requirements[:action] == @action &&
           route.requirements[:controller] == @controller
       end

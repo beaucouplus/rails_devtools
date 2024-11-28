@@ -22,6 +22,7 @@ module Devtools
           div(class: "mt-4 pt-4 border-t-2 border-base-300 mt-2 text-sm text-neutral") do
             controller_card
             redirection_card
+            rack_app_card
           end
           route_path_input
         end
@@ -41,8 +42,18 @@ module Devtools
       end
     end
 
+    def rack_app_card
+      return unless @route.rack_app?
+
+      div(class: "card card-compact bg-white text-sm w-full shadow-sm mb-4 border border-base-300") do
+        div(class: "card-body flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4") do
+          h3(class: "block text-lg font-bold mb-2") { "Custom rack app #{@route.name}" }
+        end
+      end
+    end
+
     def controller_card
-      return if @route.redirection?
+      return if @route.redirection? || @route.rack_app?
 
       render Routes::RouteDetails::ControllerCard.new(
         controller_info: @route.controller_info
