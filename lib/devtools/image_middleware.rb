@@ -1,5 +1,16 @@
 module Devtools
   class ImageMiddleware
+    IMAGE_EXTENSIONS = {
+      '.jpg'  => 'image/jpeg',
+      '.jpeg' => 'image/jpeg',
+      '.png'  => 'image/png',
+      '.gif'  => 'image/gif',
+      '.svg'  => 'image/svg+xml',
+      '.webp' => 'image/webp',
+      '.avif' => 'image/avif',
+      '.ico'  => 'image/x-icon'
+    }.freeze
+
     def initialize(app)
       @app = app
     end
@@ -20,16 +31,6 @@ module Devtools
 
     private
 
-    IMAGE_EXTENSIONS = {
-      '.jpg'  => 'image/jpeg',
-      '.jpeg' => 'image/jpeg',
-      '.png'  => 'image/png',
-      '.gif'  => 'image/gif',
-      '.svg'  => 'image/svg+xml',
-      '.webp' => 'image/webp',
-      '.avif' => 'image/avif',
-      '.ico'  => 'image/x-icon'
-    }.freeze
 
     def image?(path)
       IMAGE_EXTENSIONS.keys.include?(extension(path))
