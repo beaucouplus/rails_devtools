@@ -11,11 +11,11 @@ module Devtools
         return @paths if defined?(@paths)
 
         shakapacker_config_path = Rails.root.join("config", "shakapacker.yml")
-        shakapacker_config = YAML.load_file(shakapacker_config_path)
+        shakapacker_config = YAML.load_file(shakapacker_config_path, aliases: true)
 
         @paths = Set.new([shakapacker_config["source_path"]])
         additional_paths = Set.new(shakapacker_config["additional_paths"])
-        @paths = @paths.merge!(additional_paths).to_a
+        @paths = @paths.merge(additional_paths).to_a
       end
 
       def used?
