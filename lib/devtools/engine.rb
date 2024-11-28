@@ -1,5 +1,6 @@
 require "fastimage"
 require "phlex-rails"
+require "turbo-rails"
 
 module Devtools
   class Engine < ::Rails::Engine
