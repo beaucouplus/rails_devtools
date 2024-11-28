@@ -42,6 +42,7 @@ module Devtools
     private
 
     def no_matching_controller_alert
+      return if @route.rack_app?
       return if @route.redirection?
       return if @route.controller_info.action_exists?
 
