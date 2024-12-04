@@ -7,6 +7,8 @@ module Devtools
     include Phlex::Rails::Helpers::StripTags
     include Phlex::Rails::Helpers::JavascriptIncludeTag
 
+    register_output_helper :devtools_importmap_tags
+
     def view_template(&block)
       doctype
 
@@ -19,6 +21,7 @@ module Devtools
           meta(name: "apple-mobile-web-app-title", content: "Maxime Souillat")
           meta(name: "viewport", content: "width=device-width,initial-scale=1")
 
+          devtools_importmap_tags
           csrf_meta_tags
           csp_meta_tag
 

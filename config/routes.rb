@@ -10,4 +10,10 @@ Devtools::Engine.routes.draw do
   namespace :routes do
     resources :route_path_inputs, only: :update
   end
+
+  namespace :frontend do
+    resources :importmaps, only: :index
+    get 'modules/*path', to: 'modules#show', format: :js
+
+  end
 end

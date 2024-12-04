@@ -6,4 +6,5 @@ const application = Application.start()
 application.debug = true
 window.Stimulus = application
 
+console.log("Hello from controllers/application.js")
 export { application }

@@ -25,6 +25,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "activesupport", ">= 6.1"
   spec.add_dependency "fastimage"
+  spec.add_dependency "importmap-rails", ">= 2.0.3"
   spec.add_dependency "phlex", ">= 1.11.0"
   spec.add_dependency "phlex-rails", ">= 1.1.2"
   spec.add_dependency "rails", ">= 7.1"

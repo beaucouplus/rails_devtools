@@ -1,4 +1,4 @@
-import { application } from "./application";
+import { application } from "controllers/application";
 import RevealController from '@stimulus-components/reveal'
 import Clipboard from '@stimulus-components/clipboard'
 import Notification from '@stimulus-components/notification'

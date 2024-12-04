@@ -31,7 +31,6 @@ module Devtools
 
     private
 
-
     def image?(path)
       IMAGE_EXTENSIONS.keys.include?(extension(path))
     end
@@ -41,9 +40,8 @@ module Devtools
       filename = CGI.unescape(File.basename(path))
 
       found = nil
-      config = Devtools::Engine.asset_config
 
-      config.paths.each do |path|
+      Devtools.asset_config.paths.each do |path|
         paths = Dir.glob("#{path}/**/*#{filename}*")
         found = paths.find { |path| File.file?(path) }
         break if found

@@ -9,7 +9,7 @@ module Devtools
     end
 
     def results
-      folders = Devtools::Engine.asset_config.paths
+      folders = Devtools.asset_config.paths
 
       images_by_folder = Hash.new { |hash, key| hash[key] = [] }
       extensions = ImageMiddleware::IMAGE_EXTENSIONS.keys.map { |ext| ext.delete_prefix(".") }.join(",")

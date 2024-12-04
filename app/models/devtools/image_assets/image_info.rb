@@ -78,7 +78,7 @@ module Devtools
       end
 
       def asset_config
-        @asset_config ||= Devtools::Engine.asset_config
+        @asset_config ||= Devtools.asset_config
       end
     end
   end
