@@ -15,7 +15,7 @@ module Devtools
 
         @paths = Set.new([shakapacker_config["source_path"]])
         additional_paths = Set.new(shakapacker_config["additional_paths"])
-      @paths = @paths.merge(additional_paths).to_a.compact
+        @paths = @paths.merge(additional_paths).to_a.compact
       end
 
       def used?
