@@ -20,7 +20,7 @@ module Devtools
           div(class: 'card card-compact bg-white shadow-sm group-hover:bg-primary w-[150px]') do
             figure do
               img(
-                src: @image_info.relative_asset_image_path,
+                src: helpers.host_app_image_path(@image_info.relative_asset_image_path),
                 class: 'card-image',
                 width: '150'
               )

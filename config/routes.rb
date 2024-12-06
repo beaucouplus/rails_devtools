@@ -2,10 +2,12 @@
 
 Devtools::Engine.routes.draw do
   root to: "dashboard#show"
+
   resources :dashboard, only: :show
   resources :image_assets, only: [:show, :index, :destroy]
   resources :database_tables, only: [:show, :index]
   resources :gems, only: [:show, :index]
+
   resources :routes, only: [:show, :index]
   namespace :routes do
     resources :route_path_inputs, only: :update
@@ -14,4 +16,9 @@ Devtools::Engine.routes.draw do
   namespace :frontend do
     get "modules/*path", to: "modules#show", format: :js
   end
+
+  get "host_app_images/*path", as: :host_app_image, to: "host_app_images#show",
+    constraints: lambda { |request|
+      request.path.end_with?(*Devtools::HostAppImagesController::IMAGE_EXTENSIONS)
+    }
 end
