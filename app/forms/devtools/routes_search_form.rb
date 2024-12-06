@@ -32,7 +32,7 @@ module Devtools
 
     def engine_routes
       engines = {}
-      rails_routes.select { |r| r.app.engine? }.each do |engine_route|
+      rails_routes.select { |r| r.app.engine? && r.app.app.name != "Devtools::Engine" }.each do |engine_route|
         engines[engine_route.app.app.name] = engine_route.app.app.routes.routes.select do |r|
           valid_route?(r)
         end
