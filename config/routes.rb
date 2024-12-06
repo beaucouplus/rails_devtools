@@ -2,6 +2,7 @@
 
 Devtools::Engine.routes.draw do
   root to: "dashboard#show"
+  get "*path.js.map", to: proc { [204, {}, [""]] }
 
   resources :dashboard, only: :show
   resources :image_assets, only: [:show, :index, :destroy]
