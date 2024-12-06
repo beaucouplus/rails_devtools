@@ -2,7 +2,9 @@ require "devtools/version"
 require "devtools/engine"
 
 module Devtools
-  mattr_accessor :importmap, default: Importmap::Map.new
+  def self.importmap
+    @importmap ||= Importmap.new
+  end
 
   def self.asset_config
     @asset_config ||= AssetConfig.find

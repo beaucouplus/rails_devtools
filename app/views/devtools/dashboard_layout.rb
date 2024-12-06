@@ -7,8 +7,6 @@ module Devtools
     include Phlex::Rails::Helpers::StripTags
     include Phlex::Rails::Helpers::JavascriptIncludeTag
 
-    register_output_helper :devtools_importmap_tags
-
     def view_template(&block)
       doctype
 
@@ -21,9 +19,12 @@ module Devtools
           meta(name: "apple-mobile-web-app-title", content: "Maxime Souillat")
           meta(name: "viewport", content: "width=device-width,initial-scale=1")
 
-          devtools_importmap_tags
           csrf_meta_tags
           csp_meta_tag
+
+          importmap_tag
+          preload_tags
+          script(type: "module") { "import 'application' ;".html_safe }
 
           script(src:"https://cdn.tailwindcss.com")
           link(
@@ -45,6 +46,18 @@ module Devtools
     end
 
     private
+
+    def importmap_tag
+      script(type: "importmap", data_turbo_track: "reload") do
+        Devtools.importmap.to_json.html_safe
+      end
+    end
+
+    def preload_tags
+      Devtools.importmap.preloads.each do |preload|
+        link(rel: "modulepreload", href: preload.path)
+      end
+    end
 
     def right_drawer(&block)
       render Components::Ui::Drawer.new(id: "right_drawer", direction: "right") do |right_drawer|

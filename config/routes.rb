@@ -12,8 +12,6 @@ Devtools::Engine.routes.draw do
   end
 
   namespace :frontend do
-    resources :importmaps, only: :index
-    get 'modules/*path', to: 'modules#show', format: :js
-
+    get "modules/*path", to: "modules#show", format: :js
   end
 end

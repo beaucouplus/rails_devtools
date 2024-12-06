@@ -11,10 +11,6 @@ Gem::Specification.new do |spec|
   spec.summary = "Devtools is a set of tools to help you develop your Rails application."
   spec.description = "Devtools is a set of tools to help you develop your Rails application."
 
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the "allowed_push_host"
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
-
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage
   spec.metadata["changelog_uri"] = spec.homepage
@@ -24,7 +20,6 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency "fastimage"
-  spec.add_dependency "importmap-rails", ">= 2.0.3"
   spec.add_dependency "phlex", ">= 1.11.0"
   spec.add_dependency "phlex-rails", ">= 1.1.2"
   spec.add_dependency "rails", ">= 7.1"
