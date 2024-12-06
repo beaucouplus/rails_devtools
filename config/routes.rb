@@ -19,6 +19,6 @@ Devtools::Engine.routes.draw do
 
   get "host_app_images/*path", as: :host_app_image, to: "host_app_images#show",
     constraints: lambda { |request|
-      request.path.end_with?(*Devtools::HostAppImagesController::IMAGE_EXTENSIONS)
+      request.path.end_with?(*Devtools::ImageAssets::ImageInfo::IMAGE_EXTENSIONS.to_a)
     }
 end

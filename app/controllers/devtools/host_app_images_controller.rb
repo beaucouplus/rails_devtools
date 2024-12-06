@@ -2,21 +2,10 @@
 
 module Devtools
   class HostAppImagesController < BaseController
-    IMAGE_EXTENSIONS = [
-      ".jpg",
-      ".jpeg",
-      ".png",
-      ".gif",
-      ".svg",
-      ".webp",
-      ".avif",
-      ".ico"
-    ].freeze
-
     def show
-      image_path = find_source_image
-      return head :not_found unless image_path
+      return head :not_found unless image?
 
+      image_path = find_source_image
       mime_type = Mime::Type.lookup_by_extension(params[:format])
       send_file image_path, type: mime_type, disposition: "inline"
     end
@@ -28,12 +17,10 @@ module Devtools
     end
 
     def image?
-      IMAGE_EXTENSIONS.include?(extension(image_path))
+      ImageAssets::ImageInfo::IMAGE_EXTENSIONS.include?(extension)
     end
 
     def find_source_image
-      return nil unless image?
-
       filename = CGI.unescape(File.basename(image_path))
       found = nil
 
@@ -46,8 +33,8 @@ module Devtools
       found
     end
 
-    def extension(path)
-      File.extname(path).downcase
+    def extension
+      File.extname(image_path).downcase
     end
   end
 end
