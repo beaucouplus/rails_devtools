@@ -3,45 +3,41 @@
 module Devtools
   module Routes
     class ProjectRoute
-      def self.find(id:, controller:, action:, engine:, redirection: false)
+      def self.find(name:, controller:, action:, engine:, kind:)
         new(
-          id: id,
+          name: name,
           controller: controller,
           action: action,
           engine: engine,
-          redirection: redirection
+          kind: kind
         ).find
       end
 
-      def initialize(id:, controller:, action:, engine:, redirection: false)
-        @id = id
+      def initialize(name:, controller:, action:, engine:, kind:)
+        @name = name
         @controller = controller
         @action = action
         @engine = engine
-        @redirection = redirection
+        @kind = kind
       end
 
       def find
         route_engine.routes.routes.find do |r|
-          found_route = if redirection? || no_requirements_or_redirection?(r)
-            r.name == @id
-          else
-            found_by_requirements?(r)
+          case @kind
+          when "controller"
+            found_by_requirements?(r) && include_root?(r)
+          when "redirection"
+            r.name == @name
+          when "inline"
+            wrapped_route = ActionDispatch::Routing::RouteWrapper.new(r)
+            wrapped_route.endpoint == @name
+          when "rack_app"
+            r.name == @name
           end
-
-          found_route && include_root?(r)
         end
       end
 
       private
-
-      def redirection?
-        @redirection
-      end
-
-      def no_requirements_or_redirection?(route)
-        !redirection? && !found_by_requirements?(route)
-      end
 
       def found_by_requirements?(route)
         return false if !route.requirements.key?(:controller) || !route.requirements.key?(:action)
@@ -52,7 +48,7 @@ module Devtools
 
       def include_root?(route)
         return true if route.verb != "GET"
-        return true if @id == "root"
+        return true if @name == "root"
         route.name != "root"
       end
 

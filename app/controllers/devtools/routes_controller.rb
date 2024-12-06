@@ -9,11 +9,11 @@ module Devtools
 
     def show
       route = Routes::ProjectRoute.find(
-        id: params[:id],
+        name: params[:id],
         controller: params[:route_controller],
         action: params[:route_action],
         engine: params[:route_engine],
-        redirection: params[:redirection] == "true"
+        kind: params[:route_kind]
       )
 
       render Routes::RouteDetails.new(

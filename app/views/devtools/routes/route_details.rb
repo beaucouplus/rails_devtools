@@ -13,16 +13,14 @@ module Devtools
         div(class: "mt-4 w-full sm:min-w-80") do
           engine_name
           div(class: "flex justify-between gap-x-2 items-center") do
-            h3(class: "text-lg font-bold mb-2") { "#{@route.name}_path" }
+            h3(class: "text-lg font-bold mb-2") { route_name }
             div(class: "badge badge-lg bg-base-300 text-sm") { @route.verb }
           end
           p(class: "text-sm text-neutral") { only_path }
           open_link
           segments
           div(class: "mt-4 pt-4 border-t-2 border-base-300 mt-2 text-sm text-neutral") do
-            controller_card
-            redirection_card
-            rack_app_card
+            more_info_card
           end
           route_path_input
         end
@@ -31,9 +29,28 @@ module Devtools
 
     private
 
-    def redirection_card
-      return unless @route.redirection?
+    def more_info_card
+      case @route.kind
+      when "controller"
+        controller_card
+      when "redirection"
+        redirection_card
+      when "rack_app"
+        rack_app_card
+      when "inline"
+        inline_card
+      end
+    end
 
+    def route_name
+      if @route.inline?
+        @route.endpoint
+      else
+        "#{@route.name}_path"
+      end
+    end
+
+    def redirection_card
       div(class: "card card-compact bg-white text-sm w-full shadow-sm mb-4 border border-base-300") do
         div(class: "card-body flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4") do
           h3(class: "block text-lg font-bold mb-2") { "Redirection #{@route.redirection_info.status}" }
@@ -43,8 +60,6 @@ module Devtools
     end
 
     def rack_app_card
-      return unless @route.rack_app?
-
       div(class: "card card-compact bg-white text-sm w-full shadow-sm mb-4 border border-base-300") do
         div(class: "card-body flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4") do
           h3(class: "block text-lg font-bold mb-2") { "Custom rack app #{@route.name}" }
@@ -53,11 +68,17 @@ module Devtools
     end
 
     def controller_card
-      return if @route.redirection? || @route.rack_app?
-
       render Routes::RouteDetails::ControllerCard.new(
         controller_info: @route.controller_info
       )
+    end
+
+    def inline_card
+      div(class: "card card-compact bg-white text-sm w-full shadow-sm mb-4 border border-base-300") do
+        div(class: "card-body flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4") do
+          h3(class: "block text-lg font-bold mb-2") { @route.endpoint }
+        end
+      end
     end
 
     def engine_name
@@ -98,6 +119,8 @@ module Devtools
     end
 
     def route_path_input
+      return if @route.inline?
+
       turbo_frame_tag("route_path_input_form") do
         div(data_controller: "turbo-form") do
           form_with(
@@ -105,25 +128,26 @@ module Devtools
               @route.name,
               route_engine: @route.engine_info.name,
               route_controller: @route.controller,
-              route_action: @route.action
+              route_action: @route.action,
+              route_kind: @route.kind
             ),
             method: :patch,
             data: { turbo_frame: "route_path_input", turbo_form_target: "form" }
           ) do |form|
-            div(class: "flex gap-2") do
-              engine_checkbox(form)
-              div do
-                label(class: "label cursor-pointer justify-normal gap-1") do
-                  span(class: "label-text") { "URL" }
-                  form.check_box(
-                    :url_suffix,
-                    class: "checkbox checkbox-xs",
-                    data: { action: "change->turbo-form#submit" }
-                  )
+              div(class: "flex gap-2") do
+                engine_checkbox(form)
+                div do
+                  label(class: "label cursor-pointer justify-normal gap-1") do
+                    span(class: "label-text") { "URL" }
+                    form.check_box(
+                      :url_suffix,
+                      class: "checkbox checkbox-xs",
+                      data: { action: "change->turbo-form#submit" }
+                    )
+                  end
                 end
               end
             end
-          end
         end
       end
       render Routes::RouteDetails::RoutePathInput.new(route: @route)

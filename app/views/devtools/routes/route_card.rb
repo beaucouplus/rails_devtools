@@ -14,7 +14,7 @@ module Devtools
           route_engine: @engine,
           route_controller: @route.controller,
           route_action: @route.action,
-          redirection: @route.redirection?
+          route_kind: @route.kind
         ),
         data: { turbo_frame: "drawer_content", action: "click->checkbox#toggle" },
         class: "group flex w-full"
@@ -24,7 +24,7 @@ module Devtools
             div(class: "flex flex-col sm:flex-row justify-between sm:items-center gap-y-2 sm:gap-x-2") do
               div(class: "flex items-center") do
                 h2(class: "inline-flex card-title !mb-0 leading-none text-base items-center") do
-                  "#{@route.name}_path"
+                  route_name
                 end
                 redirection_badge
                 no_matching_controller_alert
@@ -41,9 +41,16 @@ module Devtools
 
     private
 
+    def route_name
+      if @route.inline?
+        @route.endpoint
+      else
+        "#{@route.name}_path"
+      end
+    end
+
     def no_matching_controller_alert
-      return if @route.rack_app?
-      return if @route.redirection?
+      return unless @route.kind == "controller"
       return if @route.controller_info.action_exists?
 
       span(class: "text-error ml-1") do

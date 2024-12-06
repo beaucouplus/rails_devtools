@@ -26,25 +26,50 @@ module Devtools
         @name ||= route_name
       end
 
+      def kind
+        @kind ||=
+          if rack_app?
+            "rack_app"
+          elsif redirection?
+            "redirection"
+          elsif inline?
+            "inline"
+          else
+            "controller"
+          end
+      end
+
       def verb
         return "?" if rack_app?
         @wrapped_route.verb.presence || "ALL"
       end
 
       def redirection?
+        return false if inline?
+
         @route.app&.app.respond_to?(:redirect?) && @route.app.app.redirect?
       end
 
       def rack_app?
-        !redirection? && @route.app.app.respond_to?(:call) &&
+        return false if inline?
+        return false if redirection?
+
+        @route.app.app.respond_to?(:call) &&
           !@route.app.app.is_a?(ActionDispatch::Routing::RouteSet)
+      end
+
+      def inline?
+        endpoint.include?("Proc/Lambda")
+      end
+
+      def controller?
+        [inline?, redirection?, rack_app?].none?
       end
 
       RedirectionInfo = Data.define(:status, :block)
 
       def redirection_info
         return unless redirection?
-        return @redirection_info if defined?(@redirection_info)
 
         @redirection_info ||= RedirectionInfo.new(
           status: @route.app.app.status,
@@ -64,6 +89,7 @@ module Devtools
       private
 
       def route_name
+        return endpoint if inline?
         return @wrapped_route.name if @wrapped_route.name.present?
 
         matching_route = engine_info.engine.routes.routes.find do |r|
