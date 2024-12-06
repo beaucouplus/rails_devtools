@@ -4,21 +4,14 @@ module Devtools
       protect_from_forgery except: :show
 
       def show
-        render file: Devtools.importmap.find(params[:path]).file_path
-      end
+        file = Devtools.importmap.find(params[:path]).file_path
+        return head :not_found unless file
 
-      private
-
-      def engine_path_to(*args)
-        Devtools::Engine.root.join(*args)
-      end
-
-      def vendor_path_to(filename)
-        engine_path_to("vendor", "javascript", filename)
-      end
-
-      def local_javascript_path_to(filename)
-        engine_path_to("app", "javascript", filename)
+        send_file(
+          file,
+          type: "application/javascript",
+          disposition: "inline"
+        )
       end
     end
   end

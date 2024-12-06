@@ -14,7 +14,7 @@ Devtools::Engine.routes.draw do
   end
 
   namespace :frontend do
-    get "modules/*path", to: "modules#show", format: :js
+    get "modules/*path", to: "modules#show", format: :js, constraints: lambda { |request| request.path.end_with?(".js") }
   end
 
   get "host_app_images/*path", as: :host_app_image, to: "host_app_images#show",
