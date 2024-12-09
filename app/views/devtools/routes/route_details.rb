@@ -134,20 +134,20 @@ module Devtools
             method: :patch,
             data: { turbo_frame: "route_path_input", turbo_form_target: "form" }
           ) do |form|
-              div(class: "flex gap-2") do
-                engine_checkbox(form)
-                div do
-                  label(class: "label cursor-pointer justify-normal gap-1") do
-                    span(class: "label-text") { "URL" }
-                    form.check_box(
-                      :url_suffix,
-                      class: "checkbox checkbox-xs",
-                      data: { action: "change->turbo-form#submit" }
-                    )
-                  end
+            div(class: "flex gap-2") do
+              engine_checkbox(form)
+              div do
+                label(class: "label cursor-pointer justify-normal gap-1") do
+                  span(class: "label-text") { "URL" }
+                  form.check_box(
+                    :url_suffix,
+                    class: "checkbox checkbox-xs",
+                    data: { action: "change->turbo-form#submit" }
+                  )
                 end
               end
             end
+          end
         end
       end
       render Routes::RouteDetails::RoutePathInput.new(route: @route)

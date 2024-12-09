@@ -15,11 +15,11 @@ Devtools::Engine.routes.draw do
   end
 
   namespace :frontend do
-    get "modules/*path", to: "modules#show", format: :js, constraints: lambda { |request| request.path.end_with?(".js") }
+    get "modules/*path", to: "modules#show", format: :js, constraints: ->(request) { request.path.end_with?(".js") }
   end
 
   get "host_app_images/*path", as: :host_app_image, to: "host_app_images#show",
-    constraints: lambda { |request|
-      request.path.end_with?(*Devtools::ImageAssets::ImageInfo::IMAGE_EXTENSIONS.to_a)
-    }
+                               constraints: lambda { |request|
+                                 request.path.end_with?(*Devtools::ImageAssets::ImageInfo::IMAGE_EXTENSIONS.to_a)
+                               }
 end
