@@ -42,6 +42,7 @@ module Devtools
       AssetProviders::ViteRailsConfig,
       AssetProviders::JsbundlingRailsConfig,
       AssetProviders::ShakapackerConfig,
+      AssetProviders::PropshaftConfig
     ].freeze
 
     def list
