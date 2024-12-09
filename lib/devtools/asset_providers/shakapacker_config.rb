@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Devtools
-  module Configs
+  module AssetProviders
     class ShakapackerConfig
       def provider
         :shakapacker

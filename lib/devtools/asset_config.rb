@@ -37,15 +37,15 @@ module Devtools
   end
 
   class AssetProvider
-    CONFIGS = [
-      Configs::SprocketConfig,
-      Configs::ViteRailsConfig,
-      Configs::JsbundlingRailsConfig,
-      Configs::ShakapackerConfig
+    PROVIDERS = [
+      AssetProviders::SprocketConfig,
+      AssetProviders::ViteRailsConfig,
+      AssetProviders::JsbundlingRailsConfig,
+      AssetProviders::ShakapackerConfig,
     ].freeze
 
     def list
-      @list ||= CONFIGS.select { |config| config.new.used? }.map(&:new)
+      @list ||= PROVIDERS.select { |config| config.new.used? }.map(&:new)
     end
   end
 end
