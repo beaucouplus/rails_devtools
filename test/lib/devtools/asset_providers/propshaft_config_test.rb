@@ -31,21 +31,17 @@ module Devtools
       end
 
       test "used? returns true when Propshaft is defined" do
-        # Only remove if defined to avoid errors
         Object.send(:remove_const, :Propshaft) if defined?(Propshaft)
 
-        # Define Propshaft temporarily
         Object.const_set(:Propshaft, Module.new)
 
         config = PropshaftConfig.new
         assert config.used?
 
-        # Clean up
         Object.send(:remove_const, :Propshaft)
       end
 
       test "used? returns false when Propshaft is not defined" do
-        # Ensure Propshaft is not defined
         Object.send(:remove_const, :Propshaft) if defined?(Propshaft)
 
         config = PropshaftConfig.new
