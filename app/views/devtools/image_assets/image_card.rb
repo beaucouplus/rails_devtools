@@ -7,12 +7,12 @@ module Devtools
     end
 
     def view_template
-      turbo_frame_tag(@image_info.path) do
+      turbo_frame_tag(@image_info.full_path) do
         a(
           href: helpers.image_asset_path(
             @image_info.name,
             full_name: @image_info.basename,
-            image_path: @image_info.path
+            image_path: @image_info.full_path
           ),
           data: { turbo_frame: 'drawer_content', action: 'click->checkbox#toggle' },
           class: 'group'
@@ -20,7 +20,7 @@ module Devtools
           div(class: 'card card-compact bg-white shadow-sm group-hover:bg-primary w-[150px]') do
             figure do
               img(
-                src: helpers.host_app_image_path(@image_info.relative_asset_image_path),
+                src: helpers.host_app_image_path(@image_info.devtools_image_path),
                 class: 'card-image',
                 width: '150'
               )

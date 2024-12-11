@@ -17,12 +17,12 @@ module Devtools
         @image_path = image_path
       end
 
-      def path
+      def full_path
         @image_path
       end
 
       def valid?
-        File.file?(path) && image?(path)
+        File.file?(@image_path) && image?(@image_path)
       end
 
       def image?(path)
@@ -30,7 +30,7 @@ module Devtools
       end
 
       def basename
-        @basename ||= File.basename(path)
+        @basename ||= File.basename(@image_path)
       end
 
       def name
@@ -38,25 +38,25 @@ module Devtools
       end
 
       def extension
-        File.extname(path).downcase
+        File.extname(@image_path).downcase
       end
 
       def file_size
-        @file_size ||= FastImage.new(path).content_length
+        @file_size ||= FastImage.new(@image_path).content_length
       end
 
       def image_helper_snippet
-        "#{asset_config.helper_snippet}(\"#{relative_asset_image_path}\")"
+        "#{asset_config.helper_snippet}(\"#{devtools_image_path}\")"
       end
 
-      def relative_asset_image_path
-        return @relative_asset_image_path if defined?(@relative_asset_image_path)
+      def devtools_image_path
+        return @devtools_image_path if defined?(@devtools_image_path)
 
-        matching_path = asset_config.paths.find { |asset_path| path.start_with?(asset_path) }
+        matching_path = asset_config.paths.find { |asset_path| @image_path.start_with?(asset_path) }
         matching_base = Pathname.new(matching_path).join(asset_config.implicit_path)
-        asset_path = Pathname.new(path)
+        asset_path = Pathname.new(@image_path)
 
-        @relative_asset_image_path = asset_path
+        @devtools_image_path = asset_path
           .relative_path_from(matching_base)
           .to_s.sub("../", "")
       end
@@ -74,7 +74,7 @@ module Devtools
       private
 
       def size
-        @size ||= FastImage.size(path)
+        @size ||= FastImage.size(@image_path)
       end
 
       def asset_config

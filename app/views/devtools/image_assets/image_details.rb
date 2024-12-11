@@ -10,7 +10,7 @@ module Devtools
       turbo_frame_tag("drawer_content", class: "flex flex-col") do
         figure do
           img(
-            src: helpers.host_app_image_path(@image_info.relative_asset_image_path),
+            src: helpers.host_app_image_path(@image_info.devtools_image_path),
             width: "400"
           )
         end
@@ -59,7 +59,7 @@ module Devtools
 
     def delete_button
       button_to(
-        helpers.image_asset_path(@image_info.name, image_path: @image_info.path),
+        helpers.image_asset_path(@image_info.name, image_path: @image_info.full_path),
         class: "btn btn-outline btn-error btn-sm",
         method: :delete,
         form: { data: {
