@@ -21,7 +21,7 @@ module Devtools
         File.stub(:file?, true) do
           assert @image_info.valid?
         end
-        
+
         File.stub(:file?, false) do
           refute @image_info.valid?
         end
@@ -63,7 +63,7 @@ module Devtools
           helper_snippet: "image_tag",
           provider: nil
         )
-        
+
         Devtools.stub(:asset_config, asset_config) do
           @image_info.stub(:devtools_image_path, "test/sample.jpg") do
             assert_equal "image_tag(\"test/sample.jpg\")", @image_info.image_helper_snippet
@@ -78,7 +78,7 @@ module Devtools
           helper_snippet: nil,
           provider: nil
         )
-        
+
         Devtools.stub(:asset_config, asset_config) do
           assert_equal "test/sample.jpg", @image_info.devtools_image_path
         end
@@ -98,7 +98,7 @@ module Devtools
           helper_snippet: nil,
           provider: "local"
         )
-        
+
         Devtools.stub(:asset_config, asset_config) do
           assert_equal "local", @image_info.provider
         end
@@ -111,11 +111,11 @@ module Devtools
           helper_snippet: nil,
           provider: nil
         )
-        
+
         Devtools.stub(:asset_config, asset_config) do
           first_call = @image_info.devtools_image_path
           second_call = @image_info.devtools_image_path
-          
+
           assert_equal first_call, second_call
           assert_equal "test/sample.jpg", first_call
         end

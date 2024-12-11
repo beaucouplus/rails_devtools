@@ -3,7 +3,7 @@
 module Devtools
   module Components
     class Ui::Drawer < Components::ApplicationComponent
-      def initialize(id:, direction: "left", classes: "", &block)
+      def initialize(id:, direction: "left", classes: "")
         @id = id
         @direction = direction
         @classes = classes
@@ -42,7 +42,7 @@ module Devtools
       end
 
       def direction_class
-        (@direction == "left") ? "" : "drawer-end"
+        @direction == "left" ? "" : "drawer-end"
       end
     end
   end
