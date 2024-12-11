@@ -106,58 +106,5 @@ module Devtools
         matching_route.name
       end
     end
-
-    class EngineInfo
-      def initialize(engine_name)
-        @engine_name = engine_name
-      end
-
-      def engine
-        return Rails.application if @engine_name == "Application"
-        @engine_name.constantize
-      end
-
-      def engine?
-        @engine_name != "Application"
-      end
-
-      def name
-        @engine_name
-      end
-
-      def path
-        @path ||= engine.routes.find_script_name({})
-      end
-
-      def helper_prefix
-        path.gsub("/", "").underscore
-      end
-    end
-
-    class ControllerInfo
-      attr_reader :action
-
-      def initialize(controller_name: nil, action: nil)
-        @controller_name = controller_name
-        @action = action
-      end
-
-      def file_path
-        full_class_name.underscore + ".rb"
-      end
-
-      def full_class_name
-        @full_class_name ||= [@controller_name, "controller"].join("_").camelize
-      end
-
-      def controller
-        @controller ||= full_class_name.safe_constantize
-      end
-
-      def action_exists?
-        return false unless controller
-        controller.action_methods.include?(@action)
-      end
-    end
   end
 end
