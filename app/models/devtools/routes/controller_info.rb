@@ -22,6 +22,7 @@ module Devtools
 
       def action_exists?
         return false unless controller
+
         controller.action_methods.include?(@action)
       end
     end

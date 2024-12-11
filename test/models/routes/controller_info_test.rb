@@ -52,7 +52,7 @@ module Devtools
       test "caches controller lookup" do
         first_result = @controller_info.controller
         assert_equal DummyController, first_result
-        
+
         @controller_info.instance_variable_set("@controller_name", "nonexistent")
         assert_equal DummyController, @controller_info.controller
       end

@@ -40,7 +40,7 @@ class Devtools::Routes::RouteInfoTest < ActiveSupport::TestCase
       "users",
       { controller: "users", action: "index" }
     )
-    
+
     @wrapped_route = RouteWrapperDouble.new(
       "users",
       "/users",
@@ -48,7 +48,7 @@ class Devtools::Routes::RouteInfoTest < ActiveSupport::TestCase
       ["users", :format],
       { controller: "users", action: "index" }
     )
-    
+
     ActionDispatch::Routing::RouteWrapper.stub(:new, @wrapped_route) do
       @route_info = Devtools::Routes::RouteInfo.new(@route)
     end
@@ -86,7 +86,7 @@ class Devtools::Routes::RouteInfoTest < ActiveSupport::TestCase
       nil,
       {}
     )
-    
+
     ActionDispatch::Routing::RouteWrapper.stub(:new, @wrapped_route) do
       route_info = Devtools::Routes::RouteInfo.new(route)
       assert_equal "rack_app", route_info.kind
@@ -96,8 +96,8 @@ class Devtools::Routes::RouteInfoTest < ActiveSupport::TestCase
 
   test "determines route kind for inline route" do
     inline_wrapped_route = @wrapped_route.dup
-    def inline_wrapped_route.endpoint; "Proc/Lambda"; end
-    
+    def endpoint = "Proc/Lambda"
+
     ActionDispatch::Routing::RouteWrapper.stub(:new, inline_wrapped_route) do
       route_info = Devtools::Routes::RouteInfo.new(@route)
       assert_equal "inline", route_info.kind
@@ -106,14 +106,14 @@ class Devtools::Routes::RouteInfoTest < ActiveSupport::TestCase
   end
 
   test "determines route kind for redirection" do
-    redirect_app = RedirectApp.new(301, ->{ redirect_to "/" })
+    redirect_app = RedirectApp.new(301, -> { redirect_to "/" })
     route = RouteDouble.new(
       AppWrapper.new(redirect_app),
       "/users",
       nil,
       {}
     )
-    
+
     ActionDispatch::Routing::RouteWrapper.stub(:new, @wrapped_route) do
       route_info = Devtools::Routes::RouteInfo.new(route)
       assert_equal "redirection", route_info.kind
@@ -122,14 +122,14 @@ class Devtools::Routes::RouteInfoTest < ActiveSupport::TestCase
   end
 
   test "returns redirection info" do
-    redirect_app = RedirectApp.new(301, ->{ redirect_to "/" })
+    redirect_app = RedirectApp.new(301, -> { redirect_to "/" })
     route = RouteDouble.new(
       AppWrapper.new(redirect_app),
       "/users",
       nil,
       {}
     )
-    
+
     ActionDispatch::Routing::RouteWrapper.stub(:new, @wrapped_route) do
       route_info = Devtools::Routes::RouteInfo.new(route)
       assert_equal 301, route_info.redirection_info.status
@@ -150,7 +150,7 @@ class Devtools::Routes::RouteInfoTest < ActiveSupport::TestCase
       nil,
       {}
     )
-    
+
     ActionDispatch::Routing::RouteWrapper.stub(:new, @wrapped_route) do
       route_info = Devtools::Routes::RouteInfo.new(route)
       assert_equal "?", route_info.verb
@@ -165,7 +165,7 @@ class Devtools::Routes::RouteInfoTest < ActiveSupport::TestCase
       ["users", :format],
       { controller: "users", action: "index" }
     )
-    
+
     ActionDispatch::Routing::RouteWrapper.stub(:new, no_verb_wrapped_route) do
       route_info = Devtools::Routes::RouteInfo.new(@route)
       assert_equal "ALL", route_info.verb

@@ -20,12 +20,12 @@ class Devtools::Routes::EngineInfoTest < ActiveSupport::TestCase
       end
     end
     Object.const_set("AdminEngine", engine_class)
-    
+
     engine_info = Devtools::Routes::EngineInfo.new("AdminEngine")
     assert engine_info.engine?
     assert_equal "/admin", engine_info.path
     assert_equal "admin", engine_info.helper_prefix
-    
+
     Object.send(:remove_const, "AdminEngine")
   end
 

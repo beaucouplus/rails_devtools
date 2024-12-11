@@ -7,6 +7,7 @@ module Devtools
 
       def engine
         return Rails.application if @engine_name == "Application"
+
         @engine_name.constantize
       end
 
