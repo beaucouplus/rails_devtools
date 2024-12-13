@@ -22,11 +22,11 @@ module Devtools
       end
 
       def valid?
-        File.file?(@image_path) && image?(@image_path)
+        File.file?(@image_path) && image?
       end
 
-      def image?(path)
-        IMAGE_EXTENSIONS.include?(extension)
+      def image?
+        FastImage.type(@image_path).present?
       end
 
       def basename
