@@ -21,7 +21,7 @@ module Devtools
       end
 
       routes.select { |route| route.name.downcase.include?(@search) }
-        .group_by { |route| route.engine_info.name }
+            .group_by { |route| route.engine_info.name }
     end
 
     private
