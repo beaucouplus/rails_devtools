@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Devtools
-  class RoutesSearchForm
+  class RouteSearchForm
     include ActiveModel::Model
 
     def initialize(search: "")

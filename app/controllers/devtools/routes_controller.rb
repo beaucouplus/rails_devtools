@@ -3,7 +3,7 @@
 module Devtools
   class RoutesController < BaseController
     def index
-      form = RoutesSearchForm.new(search: form_params[:search])
+      form = RouteSearchForm.new(search: form_params[:search])
       render Routes::Index.new(routes: form.results, form: form)
     end
 
@@ -24,7 +24,7 @@ module Devtools
     private
 
     def form_params
-      params[:routes_search_form] || { search: "" }
+      params[:route_search_form] || { search: "" }
     end
   end
 end

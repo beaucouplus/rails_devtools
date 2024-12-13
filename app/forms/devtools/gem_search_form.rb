@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Devtools
-  class GemsSearchForm
+  class GemSearchForm
     include ActiveModel::Model
 
     GemInfo = Data.define(

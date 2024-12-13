@@ -3,9 +3,9 @@
 require "test_helper"
 
 module Devtools
-  class RoutesSearchFormTest < ActiveSupport::TestCase
+  class RouteSearchFormTest < ActiveSupport::TestCase
     test "returns all routes when search is empty" do
-      form = RoutesSearchForm.new(search: "")
+      form = RouteSearchForm.new(search: "")
       results = form.results
 
       assert_includes results.keys, "Application"
@@ -13,14 +13,14 @@ module Devtools
     end
 
     test "filters routes by search term" do
-      form = RoutesSearchForm.new(search: "post")
+      form = RouteSearchForm.new(search: "post")
       results = form.results
 
       assert_equal %w[post posts], results["Application"].map(&:name).sort
     end
 
     test "excludes rails internal routes" do
-      form = RoutesSearchForm.new(search: "")
+      form = RouteSearchForm.new(search: "")
       results = form.results.values.flatten
 
       refute_includes results.map(&:name), "rails_info"
@@ -28,21 +28,21 @@ module Devtools
     end
 
     test "excludes turbo routes" do
-      form = RoutesSearchForm.new(search: "")
+      form = RouteSearchForm.new(search: "")
       results = form.results.values.flatten
 
       refute_any results.map(&:name), ->(name) { name&.start_with?("turbo_") }
     end
 
     test "excludes devtools engine routes" do
-      form = RoutesSearchForm.new(search: "")
+      form = RouteSearchForm.new(search: "")
       results = form.results
 
       refute_includes results.keys, "Devtools::Engine"
     end
 
     test "performs case-insensitive search" do
-      form = RoutesSearchForm.new(search: "Post")
+      form = RouteSearchForm.new(search: "Post")
       results = form.results
 
       assert_equal %w[post posts], results["Application"].map(&:name).sort
