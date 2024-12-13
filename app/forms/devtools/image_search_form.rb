@@ -15,7 +15,7 @@ module Devtools
       extensions = ImageAssets::ImageInfo::IMAGE_EXTENSIONS.map { |ext| ext.delete_prefix(".") }.join(",")
 
       folders.each do |dir|
-        Dir.glob("#{dir}/**/*#{@search}*.{#{extensions}}").each do |path|
+        Dir.glob("#{dir}/**/*{#{@search.upcase}, #{@search.downcase}}*.{#{extensions}}").each do |path|
           image_info = ImageAssets::ImageInfo.new(path)
           next unless image_info.valid?
 
