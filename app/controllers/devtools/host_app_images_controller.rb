@@ -7,21 +7,18 @@ module Devtools
 
       image_path = find_source_image
       mime_type = Mime::Type.lookup_by_extension(params[:format])
+
       send_file image_path, type: mime_type, disposition: "inline"
     end
 
     private
 
-    def image_path
-      "#{params[:path]}.#{params[:format]}"
-    end
-
     def image?
-      ImageAssets::ImageInfo::IMAGE_EXTENSIONS.include?(extension)
+      ImageAssets::ImageInfo::IMAGE_EXTENSIONS.include?(".#{params[:format]}")
     end
 
     def find_source_image
-      filename = CGI.unescape(File.basename(image_path))
+      filename = CGI.unescape(File.basename(params[:path]))
       found = nil
 
       Devtools.asset_config.paths.each do |base_path|
@@ -31,10 +28,6 @@ module Devtools
       end
 
       found
-    end
-
-    def extension
-      File.extname(image_path).downcase
     end
   end
 end
