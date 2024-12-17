@@ -16,13 +16,13 @@ module Devtools
       image_info = ImageAssets::ImageInfo.new(params[:image_path])
       raise "This is a not an image" unless image_info.valid?
 
-      File.delete(image_info.path)
+      File.delete(image_info.full_path)
 
       respond_to do |format|
         format.html { redirect_to image_assets_path, notice: "Image was successfully destroyed." }
         format.turbo_stream {
           render turbo_stream: [
-            turbo_stream.remove(image_info.path),
+            turbo_stream.remove(image_info.full_path),
             turbo_stream.append(
               "flash_messages",
               Components::FlashMessage.new(

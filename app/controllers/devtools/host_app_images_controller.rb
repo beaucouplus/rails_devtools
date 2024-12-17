@@ -6,6 +6,8 @@ module Devtools
       return head :not_found unless image?
 
       image_path = find_source_image
+      return head :not_found unless image_path
+
       mime_type = Mime::Type.lookup_by_extension(params[:format])
 
       send_file image_path, type: mime_type, disposition: "inline"
