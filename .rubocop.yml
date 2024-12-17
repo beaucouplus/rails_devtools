@@ -6,3 +6,6 @@ Style/StringLiterals:
 
 Metrics/ClassLength:
   Enabled: false
+
+Layout/MultilineMethodCallIdentation:
+  EnforcedStyle: indented
