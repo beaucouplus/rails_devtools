@@ -124,13 +124,7 @@ module Devtools
       turbo_frame_tag("route_path_input_form") do
         div(data_controller: "turbo-form") do
           form_with(
-            url: helpers.routes_route_path_input_path(
-              @route.name,
-              route_engine: @route.engine_info.name,
-              route_controller: @route.controller,
-              route_action: @route.action,
-              route_kind: @route.kind
-            ),
+            url: helpers.routes_route_path_input_path(@route.id),
             method: :patch,
             data: { turbo_frame: "route_path_input", turbo_form_target: "form" }
           ) do |form|

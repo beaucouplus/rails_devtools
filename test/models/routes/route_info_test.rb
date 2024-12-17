@@ -6,11 +6,11 @@ module Devtools
   class Routes::RouteInfoTest < ActiveSupport::TestCase
     setup do
       @route = Rails.application.routes.routes.find { |r| r.name == "post" }
-      @route_info = Devtools::Routes::RouteInfo.new(@route)
+      @route_info = Devtools::Routes::RouteInfo.new(@route, id: 1)
     end
 
     test "initializes with route and engine" do
-      route_info = Devtools::Routes::RouteInfo.new(@route)
+      route_info = Devtools::Routes::RouteInfo.new(@route, id: 1)
       assert_equal "Application", route_info.engine_info.name
     end
 
@@ -32,7 +32,7 @@ module Devtools
 
     test "determines route kind for inline route" do
       route = Rails.application.routes.routes.find { |r| r.name == "inline" }
-      route_info = Devtools::Routes::RouteInfo.new(route)
+      route_info = Devtools::Routes::RouteInfo.new(route, id: 1)
 
       assert_equal "inline", route_info.kind
       assert route_info.inline?
@@ -40,7 +40,7 @@ module Devtools
 
     test "determines route kind for rack app" do
       route = Rails.application.routes.routes.find { |r| r.name == "devtools" }
-      route_info = Devtools::Routes::RouteInfo.new(route)
+      route_info = Devtools::Routes::RouteInfo.new(route, id: 1)
 
       assert_equal "rack_app", route_info.kind
       assert route_info.rack_app?
@@ -48,7 +48,7 @@ module Devtools
 
     test "determines route kind for redirection" do
       route = Rails.application.routes.routes.find { |r| r.name == "redirect" }
-      route_info = Devtools::Routes::RouteInfo.new(route)
+      route_info = Devtools::Routes::RouteInfo.new(route, id: 1)
 
       assert_equal "redirection", route_info.kind
       assert route_info.redirection?
@@ -56,7 +56,7 @@ module Devtools
 
     test "returns redirection info" do
       route = Rails.application.routes.routes.find { |r| r.name == "redirect" }
-      route_info = Devtools::Routes::RouteInfo.new(route)
+      route_info = Devtools::Routes::RouteInfo.new(route, id: 1)
 
       assert_equal 301, route_info.redirection_info.status
       assert_equal "/something_else", route_info.redirection_info.block
@@ -68,14 +68,14 @@ module Devtools
 
     test "verb returns ? for rack app routes" do
       route = Rails.application.routes.routes.find { |r| r.name == "devtools" }
-      route_info = Devtools::Routes::RouteInfo.new(route)
+      route_info = Devtools::Routes::RouteInfo.new(route, id: 1)
 
       assert_equal "?", route_info.verb
     end
 
     test "verb returns ALL when no verb is specified" do
       route = Rails.application.routes.routes.find { |r| r.name == "everything" }
-      route_info = Devtools::Routes::RouteInfo.new(route)
+      route_info = Devtools::Routes::RouteInfo.new(route, id: 1)
 
       assert_equal "ALL", route_info.verb
     end

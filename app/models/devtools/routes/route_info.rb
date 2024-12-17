@@ -3,10 +3,13 @@
 module Devtools
   module Routes
     class RouteInfo
-      def initialize(route, engine: "Application")
+      attr_reader :id
+
+      def initialize(route, id:, engine: "Application")
         @route = route
         @wrapped_route = ActionDispatch::Routing::RouteWrapper.new(route)
         @engine = engine
+        @id = id
       end
 
       delegate :controller, :action, :constraints, :endpoint, to: :@wrapped_route
@@ -89,7 +92,7 @@ module Devtools
       private
 
       def route_name
-        return endpoint if inline?
+        return "Inline route to #{path.gsub('(.:format)', '')}" if inline?
         return @wrapped_route.name if @wrapped_route.name.present?
 
         matching_route = engine_info.engine.routes.routes.find do |r|

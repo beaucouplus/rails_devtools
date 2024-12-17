@@ -10,11 +10,7 @@ module Devtools
     def view_template
       a(
         href: helpers.route_path(
-          @route.name,
-          route_engine: @engine,
-          route_controller: @route.controller,
-          route_action: @route.action,
-          route_kind: @route.kind
+          @route.id
         ),
         data: { turbo_frame: "drawer_content", action: "click->checkbox#toggle" },
         class: "group flex w-full"
@@ -43,7 +39,7 @@ module Devtools
 
     def route_name
       if @route.inline?
-        @route.endpoint
+        @route.name
       else
         "#{@route.name}_path"
       end

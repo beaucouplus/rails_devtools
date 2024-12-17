@@ -8,17 +8,8 @@ module Devtools
     end
 
     def show
-      route = Routes::ProjectRoute.find(
-        name: params[:id],
-        controller: params[:route_controller],
-        action: params[:route_action],
-        engine: params[:route_engine],
-        kind: params[:route_kind]
-      )
-
-      render Routes::RouteDetails.new(
-        route: Routes::RouteInfo.new(route, engine: params[:route_engine])
-      )
+      route = Routes::Collection.find(params[:id])
+      render Routes::RouteDetails.new(route: route)
     end
 
     private

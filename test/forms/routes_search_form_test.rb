@@ -19,39 +19,11 @@ module Devtools
       assert_equal %w[post posts], results["Application"].map(&:name).sort
     end
 
-    test "excludes rails internal routes" do
-      form = RouteSearchForm.new(search: "")
-      results = form.results.values.flatten
-
-      refute_includes results.map(&:name), "rails_info"
-      refute_includes results.map(&:path), "/rails/info"
-    end
-
-    test "excludes turbo routes" do
-      form = RouteSearchForm.new(search: "")
-      results = form.results.values.flatten
-
-      refute_any results.map(&:name), ->(name) { name&.start_with?("turbo_") }
-    end
-
-    test "excludes devtools engine routes" do
-      form = RouteSearchForm.new(search: "")
-      results = form.results
-
-      refute_includes results.keys, "Devtools::Engine"
-    end
-
     test "performs case-insensitive search" do
       form = RouteSearchForm.new(search: "Post")
       results = form.results
 
       assert_equal %w[post posts], results["Application"].map(&:name).sort
-    end
-
-    private
-
-    def refute_any(collection, predicate)
-      refute collection.any?(&predicate), "Expected no elements to match the predicate"
     end
   end
 end

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   mount Devtools::Engine => "/devtools"
+  mount DummyEngine::Engine => "/dummy_engine"
 
   resources :posts, only: [:index, :show]
   get "something_else", to: "something_else#show"
