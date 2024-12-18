@@ -2,6 +2,6 @@
 
 module Devtools
   class BaseController < ApplicationController
-    layout -> { DashboardLayout }
+    layout -> { ApplicationLayout }
   end
 end

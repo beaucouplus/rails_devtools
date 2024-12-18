@@ -7,6 +7,7 @@ module Devtools
         large_screen_menu
         small_screen_menu
       end
+      large_screen_menu
     end
 
     private

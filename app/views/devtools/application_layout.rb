@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Devtools
-  class DashboardLayout < ApplicationView
+  class ApplicationLayout < ApplicationView
     include Phlex::Rails::Layout
     include Phlex::Rails::Helpers::ContentFor
     include Phlex::Rails::Helpers::StripTags
@@ -26,7 +26,7 @@ module Devtools
           preload_tags
           script(type: "module") { "import 'application' ;".html_safe }
 
-          script(src:"https://cdn.tailwindcss.com")
+          script(src: "https://cdn.tailwindcss.com")
           link(
             href: "https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css",
             rel: "stylesheet",
@@ -82,9 +82,9 @@ module Devtools
       end
     end
 
-    def page_content(&block)
+    def page_content(&)
       turbo_frame_tag("flash_messages")
-      div(class: "mt-4 mb-16 max-w-screen-2xl mx-4", &block)
+      div(class: "mt-4 mb-16 max-w-screen-2xl mx-4", &)
     end
   end
 end
