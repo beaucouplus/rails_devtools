@@ -5,6 +5,8 @@ require "json"
 module Devtools
   module Importmaps
     class BaseTest < ActiveSupport::TestCase
+      include Devtools::Engine.routes.url_helpers
+
       setup do
         # Clear pins before each test
         Base.instance_variable_set(:@pins, [])
@@ -97,7 +99,7 @@ module Devtools
       end
 
       test "path method returns correct pathname" do
-        expected_path = Pathname.new("/devtools/frontend/modules/test.js")
+        expected_path = Pathname.new("/devtools/frontend/modules/test.js").to_s
         assert_equal expected_path, @pin.path
       end
 

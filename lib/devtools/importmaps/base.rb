@@ -2,7 +2,7 @@ module Devtools
   module Importmaps
     class Base
       def self.pin(name, to: nil, preload: true, vendor: false)
-        to = to.nil? ? "#{name}.js" : to
+        to = "#{name}.js" if to.nil?
         pins << Pin.new(name, to, preload, vendor)
       end
 
@@ -46,6 +46,8 @@ module Devtools
   end
 
   class Pin
+    include Devtools::Engine.routes.url_helpers
+
     attr_reader :name, :to, :preload, :vendor
 
     def initialize(name, to, preload, vendor)
@@ -60,13 +62,13 @@ module Devtools
     end
 
     def path
-      @path ||= Pathname.new("/devtools").join("frontend", "modules").join(to)
+      @path ||= frontend_path(to)
     end
 
     private
 
-    def engine_path_to(*args)
-      Devtools::Engine.root.join(*args)
+    def engine_path_to(*)
+      Devtools::Engine.root.join(*)
     end
 
     def vendor_path_to(filename)
