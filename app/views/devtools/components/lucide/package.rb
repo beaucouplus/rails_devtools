@@ -2,7 +2,7 @@
 
 module Devtools
   module Components
-    class Lucide::Close < Lucide::Base
+    class Lucide::Package < Lucide::Base
       def view_template
         svg(
           xmlns: "http://www.w3.org/2000/svg",
@@ -14,10 +14,15 @@ module Devtools
           stroke_width: "2",
           stroke_linecap: "round",
           stroke_linejoin: "round",
-          class: "lucide lucide-x"
+          class: "lucide lucide-package"
         ) do |s|
-          s.path(d: "M18 6 6 18")
-          s.path(d: "m6 6 12 12")
+          s.path(
+            d:
+              "M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"
+          )
+          s.path(d: "M12 22V12")
+          s.path(d: "m3.3 7 7.703 4.734a2 2 0 0 0 1.994 0L20.7 7")
+          s.path(d: "m7.5 4.27 9 5.15")
         end
       end
     end

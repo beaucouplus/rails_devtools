@@ -3,11 +3,8 @@
 module Devtools
   class Components::Ui::Menu < Components::ApplicationComponent
     def view_template
-      turbo_frame_tag "menu" do
-        large_screen_menu
-        small_screen_menu
-      end
       large_screen_menu
+      small_screen_menu
     end
 
     private
@@ -52,17 +49,19 @@ module Devtools
       end
     end
 
+    MenuItem = Data.define(:icon, :name, :path)
+
     def menu_items(classes:, &block)
       ul(class: [classes, "menu bg-base-200 text-base-content h-full"]) do
         block.call if block_given?
 
         items.each do |menu_item|
+          item = MenuItem.new(**menu_item)
           li do
-            link_to(
-              menu_item[:name],
-              menu_item[:path],
-              data: { turbo_frame: "page_content", turbo_action: "advance" }
-            )
+            a(href: item.path) do
+              span(class: "mr-1") { render item.icon.new(width: 16, height: 16) }
+              span { item.name }
+            end
           end
         end
       end
@@ -70,10 +69,10 @@ module Devtools
 
     def items
       [
-        { name: "Database tables", path: helpers.database_tables_path },
-        { name: "Gems", path: helpers.gems_path },
-        { name: "Routes", path: helpers.routes_path },
-        { name: "Image assets", path: helpers.image_assets_path }
+        { icon: Lucide::Database, name: "Database tables", path: helpers.database_tables_path },
+        { icon: Lucide::Package, name: "Gems", path: helpers.gems_path },
+        { icon: Lucide::SignPost, name: "Routes", path: helpers.routes_path },
+        { icon: Lucide::Images, name: "Image assets", path: helpers.image_assets_path }
       ]
     end
   end

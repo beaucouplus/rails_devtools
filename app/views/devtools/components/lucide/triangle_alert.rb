@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Devtools
   module Components
     class Lucide::TriangleAlert < Lucide::Base
