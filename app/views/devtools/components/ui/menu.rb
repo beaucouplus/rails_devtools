@@ -2,6 +2,8 @@
 
 module Devtools
   class Components::Ui::Menu < Components::ApplicationComponent
+    include Phlex::Rails::Helpers::CurrentPage
+
     def view_template
       large_screen_menu
       small_screen_menu
@@ -58,7 +60,7 @@ module Devtools
         items.each do |menu_item|
           item = MenuItem.new(**menu_item)
           li do
-            a(href: item.path) do
+            a(href: item.path, class: current_page?(item.path) && "active") do
               span(class: "mr-1") { render item.icon.new(width: 16, height: 16) }
               span { item.name }
             end
