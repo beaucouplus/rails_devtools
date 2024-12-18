@@ -6,4 +6,6 @@ gemspec
 
 # Start debugger with binding.b [https://github.com/ruby/debug]
 gem "debug", ">= 1.0.0"
+gem "rubocop", require: false
+gem "ruby-lsp", require: false
 gem "sqlite3", "~> 2.1"

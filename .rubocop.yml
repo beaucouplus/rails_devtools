@@ -1,4 +1,6 @@
 inherit_from: .rubocop_todo.yml
+AllCops:
+  NewCops: enable
 
 Style/StringLiterals:
   Enabled: true
@@ -7,5 +9,5 @@ Style/StringLiterals:
 Metrics/ClassLength:
   Enabled: false
 
-Layout/MultilineMethodCallIdentation:
+Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
