@@ -31,7 +31,9 @@ module Devtools
 
       def kind
         @kind ||=
-          if rack_app?
+          if engine?
+            "engine"
+          elsif rack_app?
             "rack_app"
           elsif redirection?
             "redirection"
@@ -42,8 +44,12 @@ module Devtools
           end
       end
 
+      def engine?
+        @route.app.respond_to?(:engine?) && @route.app.engine?
+      end
+
       def verb
-        return "?" if rack_app?
+        return "?" if rack_app? || engine?
         @wrapped_route.verb.presence || "ALL"
       end
 
@@ -56,6 +62,7 @@ module Devtools
       def rack_app?
         return false if inline?
         return false if redirection?
+        return false if engine?
 
         @route.app.app.respond_to?(:call) &&
           !@route.app.app.is_a?(ActionDispatch::Routing::RouteSet)

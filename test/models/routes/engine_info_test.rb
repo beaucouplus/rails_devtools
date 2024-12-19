@@ -3,7 +3,7 @@ require "test_helper"
 class Devtools::Routes::EngineInfoTest < ActiveSupport::TestCase
   EngineRoutes = Struct.new(:routes) do
     def find_script_name(_)
-      "/admin"
+      "/super/admin"
     end
   end
 
@@ -23,7 +23,7 @@ class Devtools::Routes::EngineInfoTest < ActiveSupport::TestCase
 
     engine_info = Devtools::Routes::EngineInfo.new("AdminEngine")
     assert engine_info.engine?
-    assert_equal "/admin", engine_info.path
+    assert_equal "/super/admin", engine_info.path
     assert_equal "admin", engine_info.helper_prefix
 
     Object.send(:remove_const, "AdminEngine")

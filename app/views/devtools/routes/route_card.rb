@@ -24,6 +24,7 @@ module Devtools
                 end
                 redirection_badge
                 no_matching_controller_alert
+                engine_badge
               end
               div(class: "flex gap-2 items-center justify-between sm:justify-normal") do
                 div(class: "truncate") { @route.path.gsub("(.:format)", "") }
@@ -52,6 +53,12 @@ module Devtools
       span(class: "text-error ml-1") do
         render Components::Lucide::TriangleAlert.new(width: 16, height: 16)
       end
+    end
+
+    def engine_badge
+      return unless @route.engine?
+
+      span(class: "badge badge-sm badge-accent ml-1") { "engine" }
     end
 
     def redirection_badge

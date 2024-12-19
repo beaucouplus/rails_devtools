@@ -38,12 +38,12 @@ module Devtools
       assert route_info.inline?
     end
 
-    test "determines route kind for rack app" do
+    test "determines route kind for engine" do
       route = Rails.application.routes.routes.find { |r| r.name == "devtools" }
       route_info = Devtools::Routes::RouteInfo.new(route, id: 1)
 
-      assert_equal "rack_app", route_info.kind
-      assert route_info.rack_app?
+      assert_equal "engine", route_info.kind
+      assert route_info.engine?
     end
 
     test "determines route kind for redirection" do
@@ -66,7 +66,7 @@ module Devtools
       assert_equal "GET", @route_info.verb
     end
 
-    test "verb returns ? for rack app routes" do
+    test "verb returns ? for engines" do
       route = Rails.application.routes.routes.find { |r| r.name == "devtools" }
       route_info = Devtools::Routes::RouteInfo.new(route, id: 1)
 

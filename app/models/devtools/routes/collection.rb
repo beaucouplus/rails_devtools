@@ -14,19 +14,11 @@ module Devtools
       def all
         return @all if defined?(@all)
 
-        id = 0
         @all = []
-        app_routes.each do |route|
-          id += 1
-          @all << Routes::RouteInfo.new(route, engine: "Application", id: id)
-        end
+        @current_id = 0
 
-        routes_by_engine.each do |engine, engine_routes|
-          engine_routes.each do |route|
-            id += 1
-            @all << Routes::RouteInfo.new(route, engine: engine, id: id)
-          end
-        end
+        add_routes(app_routes, engine_name: "Application")
+        process_engine_routes(rails_routes)
 
         @all
       end
@@ -37,18 +29,33 @@ module Devtools
 
       private
 
-      def app_routes
-        rails_routes.select { |r| valid_route?(r) && !r.app.engine? }
+      def add_routes(routes, engine_name:)
+        routes.each do |route|
+          @current_id += 1
+          @all << Routes::RouteInfo.new(route, engine: engine_name, id: @current_id)
+        end
       end
 
-      def routes_by_engine
-        engines = {}
-        rails_routes.select { |r| r.app.engine? && r.app.app.name != "Devtools::Engine" }.each do |engine_route|
-          engines[engine_route.app.app.name] = engine_route.app.app.routes.routes.select do |r|
-            valid_route?(r)
-          end
+      def process_engine_routes(routes)
+        routes.select { |r| r.app.engine? && r.app.app.name != "Devtools::Engine" }.each do |engine_route|
+          engine = engine_route.app.app
+          process_single_engine(engine: engine)
         end
-        engines
+      end
+
+      def process_single_engine(engine:)
+        valid_engine_routes = engine.routes.routes.select { |r| valid_route?(r) }
+        add_routes(valid_engine_routes, engine_name: engine.name)
+
+        nested_routes = engine.routes.routes
+        nested_routes.select { |r| r.app.respond_to?(:engine?) && r.app.engine? }.each do |nested_engine_route|
+          nested_engine = nested_engine_route.app.app
+          process_single_engine(engine: nested_engine)
+        end
+      end
+
+      def app_routes
+        rails_routes.select { |r| valid_route?(r) }
       end
 
       def valid_route?(route)

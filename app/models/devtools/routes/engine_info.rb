@@ -24,7 +24,9 @@ module Devtools
       end
 
       def helper_prefix
-        path.gsub("/", "").underscore
+        return "" unless engine?
+
+        path.split("/").last.underscore
       end
     end
   end

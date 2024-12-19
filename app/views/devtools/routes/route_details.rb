@@ -39,6 +39,8 @@ module Devtools
         rack_app_card
       when "inline"
         inline_card
+      when "engine"
+        engine_card
       end
     end
 
@@ -63,6 +65,14 @@ module Devtools
       div(class: "card card-compact bg-white text-sm w-full shadow-sm mb-4 border border-base-300") do
         div(class: "card-body flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4") do
           h3(class: "block text-lg font-bold mb-2") { "Custom rack app #{@route.name}" }
+        end
+      end
+    end
+
+    def engine_card
+      div(class: "card card-compact bg-white text-sm w-full shadow-sm mb-4 border border-base-300") do
+        div(class: "card-body flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4") do
+          h3(class: "block text-lg font-bold mb-2") { "Mounted engine #{@route.name}" }
         end
       end
     end
