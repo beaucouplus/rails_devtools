@@ -26,6 +26,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "turbo-rails", ">= 2.0.0"
   spec.add_dependency "zeitwerk", ">= 2.6.12"
 
-  spec.add_development_dependency "pry"
-  spec.add_development_dependency "rubocop-rails-omakase", "~> 1.0"
+  spec.metadata["rubygems_mfa_required"] = "true"
 end
