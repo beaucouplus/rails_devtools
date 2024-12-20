@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 Devtools::Engine.routes.draw do
-  root to: "dashboard#show"
+  root to: "database_tables#index"
   get "*path.js.map", to: proc { [204, {}, [""]] }
 
-  resources :dashboard, only: :show
   resources :image_assets, only: [:show, :index, :destroy]
   resources :database_tables, only: [:show, :index]
   resources :gems, only: [:show, :index]
