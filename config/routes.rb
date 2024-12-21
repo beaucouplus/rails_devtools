@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Devtools::Engine.routes.draw do
+RailsDevtools::Engine.routes.draw do
   root to: "database_tables#index"
   get "*path.js.map", to: proc { [204, {}, [""]] }
 
@@ -19,6 +19,6 @@ Devtools::Engine.routes.draw do
 
   get "host_app_images/*path", as: :host_app_image, to: "host_app_images#show",
                                constraints: lambda { |request|
-                                 request.path.end_with?(*Devtools::ImageAssets::ImageInfo::IMAGE_EXTENSIONS.to_a)
+                                 request.path.end_with?(*RailsDevtools::ImageAssets::ImageInfo::IMAGE_EXTENSIONS.to_a)
                                }
 end

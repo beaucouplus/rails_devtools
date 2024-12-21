@@ -1,6 +1,6 @@
 require "test_helper"
 
-module Devtools
+module RailsDevtools
   module Routes
     class ControllerInfoTest < ActiveSupport::TestCase
       def setup

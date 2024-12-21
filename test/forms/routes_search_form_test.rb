@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-module Devtools
+module RailsDevtools
   class RouteSearchFormTest < ActiveSupport::TestCase
     test "returns all routes when search is empty" do
       form = RouteSearchForm.new(search: "")

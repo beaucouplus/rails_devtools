@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-module Devtools
+module RailsDevtools
   module Routes
     class CollectionTest < ActiveSupport::TestCase
       def setup
@@ -19,7 +19,7 @@ module Devtools
         all_routes = Collection.all
         first_route = all_routes.first
         found_route = Collection.find(first_route.id)
-        
+
         assert_equal first_route.id, found_route.id
       end
 
@@ -42,7 +42,7 @@ module Devtools
       test "all includes application routes" do
         routes = Collection.all
         paths = routes.map(&:path)
-        
+
         assert_includes paths, with_format("/posts")
         assert_includes paths, with_format("/posts/:id")
         assert_includes paths, with_format("/something_else")
@@ -59,7 +59,7 @@ module Devtools
       test "all assigns sequential IDs to routes" do
         routes = Collection.all
         ids = routes.map(&:id)
-        
+
         assert_equal ids, (1..ids.length).to_a
       end
 

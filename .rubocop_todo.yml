@@ -11,21 +11,21 @@
 # Include: **/*.gemspec
 Gemspec/RequiredRubyVersion:
   Exclude:
-    - 'devtools.gemspec'
+    - "rails_devtools.gemspec"
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 Layout/ElseAlignment:
   Exclude:
-    - 'app/models/devtools/routes/project_route.rb'
+    - "app/models/rails_devtools/routes/project_route.rb"
 
 # Offense count: 5
 # This cop supports safe autocorrection (--autocorrect).
 Layout/EmptyLineAfterGuardClause:
   Exclude:
-    - 'app/models/devtools/routes/project_route.rb'
-    - 'app/models/devtools/routes/route_info.rb'
-    - 'lib/devtools/image_middleware.rb'
+    - "app/models/rails_devtools/routes/project_route.rb"
+    - "app/models/rails_devtools/routes/route_info.rb"
+    - "lib/rails_devtools/image_middleware.rb"
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
@@ -33,7 +33,7 @@ Layout/EmptyLineAfterGuardClause:
 # SupportedStylesAlignWith: keyword, variable, start_of_line
 Layout/EndAlignment:
   Exclude:
-    - 'app/models/devtools/routes/project_route.rb'
+    - "app/models/rails_devtools/routes/project_route.rb"
 
 # Offense count: 5
 # This cop supports safe autocorrection (--autocorrect).
@@ -43,14 +43,14 @@ Layout/EndAlignment:
 # SupportedLastArgumentHashStyles: always_inspect, always_ignore, ignore_implicit, ignore_explicit
 Layout/HashAlignment:
   Exclude:
-    - 'lib/devtools/image_middleware.rb'
+    - "lib/rails_devtools/image_middleware.rb"
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: Width, AllowedPatterns.
 Layout/IndentationWidth:
   Exclude:
-    - 'app/models/devtools/routes/project_route.rb'
+    - "app/models/rails_devtools/routes/project_route.rb"
 
 # Offense count: 5
 # This cop supports safe autocorrection (--autocorrect).
@@ -58,15 +58,15 @@ Layout/IndentationWidth:
 # SupportedStyles: aligned, indented, indented_relative_to_receiver
 Layout/MultilineMethodCallIndentation:
   Exclude:
-    - 'app/forms/devtools/routes_search_form.rb'
-    - 'app/models/devtools/image_assets/image_info.rb'
-    - 'test/dummy/config/environments/production.rb'
+    - "app/forms/rails_devtools/routes_search_form.rb"
+    - "app/models/rails_devtools/image_assets/image_info.rb"
+    - "test/dummy/config/environments/production.rb"
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 Layout/SpaceAfterColon:
   Exclude:
-    - 'app/views/devtools/dashboard_layout.rb'
+    - "app/views/rails_devtools/dashboard_layout.rb"
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
@@ -75,7 +75,7 @@ Layout/SpaceAfterColon:
 # SupportedStylesForEmptyBrackets: space, no_space
 Layout/SpaceInsideArrayLiteralBrackets:
   Exclude:
-    - 'test/dummy/config/environments/production.rb'
+    - "test/dummy/config/environments/production.rb"
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
@@ -84,14 +84,14 @@ Layout/SpaceInsideArrayLiteralBrackets:
 # SupportedStylesForEmptyBraces: space, no_space
 Layout/SpaceInsideHashLiteralBraces:
   Exclude:
-    - 'app/controllers/devtools/routes/route_path_inputs_controller.rb'
+    - "app/controllers/rails_devtools/routes/route_path_inputs_controller.rb"
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowInHeredoc.
 Layout/TrailingWhitespace:
   Exclude:
-    - 'lib/devtools/image_middleware.rb'
+    - "lib/rails_devtools/image_middleware.rb"
 
 # Offense count: 16
 # Configuration parameters: AllowedParentClasses.
@@ -101,22 +101,22 @@ Lint/MissingSuper:
 # Offense count: 2
 Lint/ShadowingOuterLocalVariable:
   Exclude:
-    - 'lib/devtools/image_middleware.rb'
+    - "lib/rails_devtools/image_middleware.rb"
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AutoCorrect, AllowUnusedKeywordArguments, IgnoreEmptyMethods, IgnoreNotImplementedMethods.
 Lint/UnusedMethodArgument:
   Exclude:
-    - 'app/models/devtools/image_assets/image_info.rb'
+    - "app/models/rails_devtools/image_assets/image_info.rb"
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AutoCorrect, ContextCreatingMethods, MethodCreatingMethods.
 Lint/UselessAccessModifier:
   Exclude:
-    - 'app/forms/devtools/image_search_form.rb'
-    - 'app/views/devtools/dashboard/show.rb'
+    - "app/forms/rails_devtools/image_search_form.rb"
+    - "app/views/rails_devtools/dashboard/show.rb"
 
 # Offense count: 14
 # Configuration parameters: AllowedMethods, AllowedPatterns, CountRepeatedAttributes.
@@ -148,7 +148,7 @@ Metrics/MethodLength:
 # AllowedMethods: lambda, proc, it
 Style/BlockDelimiters:
   Exclude:
-    - 'app/controllers/devtools/image_assets_controller.rb'
+    - "app/controllers/rails_devtools/image_assets_controller.rb"
 
 # Offense count: 21
 # This cop supports unsafe autocorrection (--autocorrect-all).
@@ -173,13 +173,13 @@ Style/FrozenStringLiteralComment:
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Style/GlobalStdStream:
   Exclude:
-    - 'test/dummy/config/environments/production.rb'
+    - "test/dummy/config/environments/production.rb"
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 Style/IfUnlessModifier:
   Exclude:
-    - 'lib/devtools/engine.rb'
+    - "lib/rails_devtools/engine.rb"
 
 # Offense count: 1
 # This cop supports unsafe autocorrection (--autocorrect-all).
@@ -187,29 +187,29 @@ Style/IfUnlessModifier:
 # SupportedStyles: literals, strict
 Style/MutableConstant:
   Exclude:
-    - 'lib/devtools/version.rb'
+    - "lib/rails_devtools/version.rb"
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: PreferredDelimiters.
 Style/PercentLiteralDelimiters:
   Exclude:
-    - 'test/dummy/config/application.rb'
+    - "test/dummy/config/application.rb"
 
 # Offense count: 2
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: SafeForConstants.
 Style/RedundantFetchBlock:
   Exclude:
-    - 'test/dummy/config/puma.rb'
+    - "test/dummy/config/puma.rb"
 
 # Offense count: 2
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: Mode.
 Style/StringConcatenation:
   Exclude:
-    - 'app/models/devtools/routes/route_info.rb'
-    - 'test/test_helper.rb'
+    - "app/models/rails_devtools/routes/route_info.rb"
+    - "test/test_helper.rb"
 
 # Offense count: 25
 # This cop supports safe autocorrection (--autocorrect).
@@ -217,8 +217,8 @@ Style/StringConcatenation:
 # SupportedStyles: single_quotes, double_quotes
 Style/StringLiterals:
   Exclude:
-    - 'app/views/devtools/image_assets/image_card.rb'
-    - 'lib/devtools/image_middleware.rb'
+    - "app/views/rails_devtools/image_assets/image_card.rb"
+    - "lib/rails_devtools/image_middleware.rb"
 
 # Offense count: 5
 # This cop supports safe autocorrection (--autocorrect).
@@ -233,7 +233,7 @@ Style/SymbolArray:
 # AllowedMethods: define_method
 Style/SymbolProc:
   Exclude:
-    - 'app/views/devtools/routes/index.rb'
+    - "app/views/rails_devtools/routes/index.rb"
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
@@ -241,7 +241,7 @@ Style/SymbolProc:
 # SupportedStyles: percent, brackets
 Style/WordArray:
   Exclude:
-    - 'app/forms/devtools/database_table_search_form.rb'
+    - "app/forms/rails_devtools/database_table_search_form.rb"
 
 # Offense count: 4
 # This cop supports safe autocorrection (--autocorrect).

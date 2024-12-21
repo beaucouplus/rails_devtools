@@ -1,16 +1,16 @@
 # Rails Devtools
 
-Rails Devtools is a set of "quality of life" tools for your rails project, distributed as a rails engine. 
+Rails Devtools is a set of "quality of life" tools for your rails project, distributed as a rails engine.
 This is inspired by the likes of Nuxt Devtools, Laravel Telescope...
 
-This gem is meant to be only used in development, and cannot work at all in production. 
+This gem is meant to be only used in development, and cannot work at all in production.
 
-> [!IMPORTANT] 
+> [!IMPORTANT]
 > The gem is an alpha version. Is has been tested on several Rails projects from Rails 7.1 to Rails 8.0. It should work on many projects but it could also break easily if your project has some tricky stuff I didn't think about.
 > If you encounter a bug, please create an issue, I'll do my best to fix it.
 
 <br />
- 
+
 ## Installation
 
 - Add the gem to your Gemfile
@@ -20,14 +20,14 @@ This gem is meant to be only used in development, and cannot work at all in prod
 
 - Mount the engine in your routes
 ```ruby
- mount Devtools::Engine => "/devtools"
+ mount RailsDevtools::Engine => "/devtools"
 ```
 
 - Update the bundle
  ```sh
 bundle install
 ```
-- Go to `http://localhost:3000/devtools` 
+- Go to `http://localhost:3000/devtools`
 
 <br /><br />
 
@@ -74,7 +74,7 @@ Since there are quite a few asset pipelines in the rails ecosystem, Rails Devtoo
 - search for gems by name
 <br /><br />
 > [!NOTE]
-> Most of those features are starting points. There are many ways to get a better grasp of a rails codebase. I have some in mind but if you happen to have ideas, feel free to share them in the discussions!  
+> Most of those features are starting points. There are many ways to get a better grasp of a rails codebase. I have some in mind but if you happen to have ideas, feel free to share them in the discussions!
 
 <br /><br />
 ## Philosophy
@@ -90,5 +90,3 @@ This is why I believe that it makes a lot of sense to provide tools that surface
 <br /><br />
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-

@@ -2,16 +2,16 @@
 
 require "test_helper"
 
-module Devtools
+module RailsDevtools
   class HostAppImagesControllerTest < ActionDispatch::IntegrationTest
-    include Devtools::Engine.routes.url_helpers
+    include RailsDevtools::Engine.routes.url_helpers
     def setup
-      @routes = Devtools::Engine.routes
+      @routes = RailsDevtools::Engine.routes
     end
 
     def with_stubbed_paths(&block)
-      fixture_path = Devtools::Engine.root.join("test/fixtures/files/images")
-      Devtools.asset_config.stub(:paths, [fixture_path]) do
+      fixture_path = RailsDevtools::Engine.root.join("test/fixtures/files/images")
+      RailsDevtools.asset_config.stub(:paths, [fixture_path]) do
         block.call
       end
     end

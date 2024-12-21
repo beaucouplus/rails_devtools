@@ -3,7 +3,7 @@
 require "test_helper"
 require "minitest/autorun"
 
-module Devtools
+module RailsDevtools
   class DatabaseTableSearchFormTest < ActiveSupport::TestCase
     setup do
       @connection = ActiveRecord::Base.connection

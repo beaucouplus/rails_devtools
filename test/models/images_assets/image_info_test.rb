@@ -2,13 +2,13 @@ require "test_helper"
 require "minitest/autorun"
 require "fastimage"
 
-module Devtools
+module RailsDevtools
   module ImageAssets
     class ImageInfoTest < ActiveSupport::TestCase
       AssetConfig = Data.define(:paths, :implicit_path, :helper_snippet, :provider)
 
       def setup
-        @base_path = Devtools::Engine.root.join("test/fixtures/files/images")
+        @base_path = RailsDevtools::Engine.root.join("test/fixtures/files/images")
         @test_image_path = @base_path.join("squirrel.jpeg").to_s
         @image_info = ImageInfo.new(@test_image_path)
         @asset_config = AssetConfig.new(
@@ -20,7 +20,7 @@ module Devtools
       end
 
       def stub_asset_config(&block)
-        Devtools.stub(:asset_config, @asset_config) do
+        RailsDevtools.stub(:asset_config, @asset_config) do
           block.call
         end
       end
@@ -34,7 +34,7 @@ module Devtools
       end
 
       test "valid? rejects invalid image path" do
-        not_an_image_path = Devtools::Engine.root.join("test/fixtures/files/images/not_really_an_image.jpg").to_s
+        not_an_image_path = RailsDevtools::Engine.root.join("test/fixtures/files/images/not_really_an_image.jpg").to_s
         image_info = ImageInfo.new(not_an_image_path)
         refute image_info.valid?
       end

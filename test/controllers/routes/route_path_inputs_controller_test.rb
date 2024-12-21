@@ -2,10 +2,10 @@
 
 require "test_helper"
 
-module Devtools
+module RailsDevtools
   module Routes
     class RoutePathInputsControllerTest < ActionDispatch::IntegrationTest
-      include Devtools::Engine.routes.url_helpers
+      include RailsDevtools::Engine.routes.url_helpers
 
       def setup
         @route = Routes::Collection.all.first

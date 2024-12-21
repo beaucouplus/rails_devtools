@@ -1,7 +1,7 @@
 require "test_helper"
 require "bundler"
 
-module Devtools
+module RailsDevtools
   class GemSearchFormTest < ActiveSupport::TestCase
     def setup
       @base_specs = [
