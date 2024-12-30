@@ -57,8 +57,8 @@ module RailsDevtools
 
         assert_equal({
                        "imports" => {
-                         "module1" => "/rails_devtools/frontend/modules/module1.js",
-                         "module2" => "/rails_devtools/frontend/modules/module2.js"
+                         "module1" => "/devtools/frontend/modules/module1.js",
+                         "module2" => "/devtools/frontend/modules/module2.js"
                        }
                      }, json_output)
       end
@@ -99,7 +99,7 @@ module RailsDevtools
       end
 
       test "path method returns correct pathname" do
-        expected_path = Pathname.new("/rails_devtools/frontend/modules/test.js").to_s
+        expected_path = Pathname.new("/devtools/frontend/modules/test.js").to_s
         assert_equal expected_path, @pin.path
       end
 

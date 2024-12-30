@@ -39,7 +39,7 @@ module RailsDevtools
     end
 
     test "determines route kind for engine" do
-      route = Rails.application.routes.routes.find { |r| r.name == "devtools" }
+      route = Rails.application.routes.routes.find { |r| r.name == "rails_devtools" }
       route_info = RailsDevtools::Routes::RouteInfo.new(route, id: 1)
 
       assert_equal "engine", route_info.kind
@@ -67,7 +67,7 @@ module RailsDevtools
     end
 
     test "verb returns ? for engines" do
-      route = Rails.application.routes.routes.find { |r| r.name == "devtools" }
+      route = Rails.application.routes.routes.find { |r| r.name == "rails_devtools" }
       route_info = RailsDevtools::Routes::RouteInfo.new(route, id: 1)
 
       assert_equal "?", route_info.verb
