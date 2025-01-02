@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name = "rails_devtools"
   spec.version = RailsDevtools::VERSION
   spec.licenses = ["MIT"]
-  spec.required_ruby_version = ">= 3.0.0"
+  spec.required_ruby_version = ">= 3.3.1"
 
   spec.authors = ["Maxime Souillat"]
   spec.email = ["maxime@beaucouplus.com"]
@@ -23,8 +23,7 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency "fastimage", "~> 2.3", ">= 2.3.1"
-  spec.add_dependency "phlex", "~> 1.11", ">= 1.11.0"
-  spec.add_dependency "phlex-rails", "~> 1.1", ">= 1.1.2"
+  spec.add_dependency "phlex-rails", ">= 1.1.2", "< 3"
   spec.add_dependency "rails", ">= 7.1"
   spec.add_dependency "turbo-rails", "~> 2.0"
   spec.add_dependency "zeitwerk", "~> 2.6", ">= 2.6.12"
