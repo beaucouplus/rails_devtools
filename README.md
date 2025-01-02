@@ -15,7 +15,7 @@ This gem is meant to be only used in development, and cannot work at all in prod
 
 - Add the gem to your Gemfile
 ```ruby
-  gem 'rails-devtools, group: :development'
+  gem 'rails_devtools, group: :development'
 ````
 
 - Mount the engine in your routes
