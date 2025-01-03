@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name = "rails_devtools"
   spec.version = RailsDevtools::VERSION
   spec.licenses = ["MIT"]
-  spec.required_ruby_version = ">= 3.3.1"
+  spec.required_ruby_version = ">= 3.0.0"
 
   spec.authors = ["Maxime Souillat"]
   spec.email = ["maxime@beaucouplus.com"]
