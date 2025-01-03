@@ -19,10 +19,7 @@ module RailsDevtools
       def view_template
         div(class: card_class) do
           div(class: "card-body") do
-            div(class: [
-                  "text-base flex justify-between gap-4 items-center",
-                  error? && "text-error"
-                ]) do
+            div(class: text_class) do
               div(class: "flex items-center ") do
                 if error?
                   span(class: "mr-1") do
@@ -52,6 +49,13 @@ module RailsDevtools
       end
 
       private
+
+      def text_class
+        [
+          "text-base flex justify-between gap-4 items-center",
+          error? && "text-error"
+        ].compact.join(" ")
+      end
 
       def card_class
         [
