@@ -52,10 +52,10 @@ module RailsDevtools
     end
 
     def index_columns_text(columns)
-      columns_list = columns.join(", ")
-      return columns_list if columns.size == 1
+      columns = Array(columns)
+      return columns.first if columns.one?
 
-      "composite of #{columns_list}"
+      "composite of #{columns.join(", ")}"
     end
   end
 end
