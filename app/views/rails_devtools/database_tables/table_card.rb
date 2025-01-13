@@ -23,13 +23,40 @@ module RailsDevtools
         @table.columns.each do |column|
           div(class: "flex gap-x-2 text-neutral pt-2 justify-between items-center") do
             div(class: "flex gap-x-2") do
-              div(class: "font-bold") { column.name }
+              div(class: "font-bold") { column_info(column.name) }
               div(class: "text-neutral italic") { column.type }
             end
             span(class: "text-xs opacity-75") { column.default } if column.default
             div(class: "text-xs opacity-75") { "not null" } unless column.null
           end
         end
+      end
+    end
+
+    def column_info(name)
+      puts "-----------"
+      puts ::ApplicationRecord.descendants.any?
+      models = ::ApplicationRecord.descendants.select do |model|
+
+        model.table_name == @table.table_name
+      end
+
+      puts models.count
+
+      puts @table.table_name
+      puts name
+      puts models.map { |m| m.name  }.join(",")
+
+      found = models.find do |model|
+        model._validators.keys.include?(name.to_sym)
+      end
+
+      puts "found #{found}"
+
+      if found
+        a(href: "#coucou") { name }
+      else
+        name
       end
     end
 

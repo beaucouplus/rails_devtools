@@ -18,5 +18,12 @@ module RailsDevtools
     config.autoload_paths << "#{root}/app/views"
     config.autoload_paths << "#{root}/app/views/layouts"
     config.autoload_paths << "#{root}/app/views/components"
+
+    initializer "rails_devtools.add_helpers" do
+      Rails.application.config.after_initialize do
+        Rails.application.eager_load!
+      end
+    end
+
   end
 end
