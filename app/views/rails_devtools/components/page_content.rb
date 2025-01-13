@@ -3,12 +3,13 @@
 module RailsDevtools
   module Components
     class PageContent < Components::ApplicationComponent
-      def view_template(&)
-        turbo_frame_tag("page_content", &)
+      def view_template(&block)
+        turbo_frame_tag("page_content", &block)
       end
 
-      def page_title(&)
-        h1(class: "text-2xl font-bold", &)
+      def page_title(&block)
+        content_for(:title) { "Rails Devtools - #{block.call}" }
+        h1(class: "text-2xl font-bold", &block)
       end
 
       def search_form(form:, path:, method: :get)
@@ -19,8 +20,8 @@ module RailsDevtools
         )
       end
 
-      def results(&)
-        div(class: "mt-4", &)
+      def results(&block)
+        div(class: "mt-4", &block)
       end
     end
   end

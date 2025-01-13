@@ -13,7 +13,7 @@ module RailsDevtools
       html(data_theme: "nord") do
         head do
           title do
-            content_for?(:title) ? strip_tags(yield(:title)) : "Maxime Souillat"
+            content_for?(:title) ? strip_tags(yield(:title)) : "Rails Devtools"
           end
 
           meta(name: "apple-mobile-web-app-title", content: "Maxime Souillat")
