@@ -34,6 +34,8 @@ module RailsDevtools
     end
 
     def indexes_list
+      return if @table.indexes.none?
+
       div(class: "mt-8") do
         h3(class: "text-lg font-bold") { "#{@table.table_name.capitalize} indexes" }
         div(class: "mt-2 flex flex-col gap-2 divide-y divide-base-200") do
