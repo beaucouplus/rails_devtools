@@ -12,6 +12,7 @@ module RailsDevtools
       include Phlex::Rails::Helpers::ButtonTo
       include Phlex::Rails::Helpers::ImageTag
       include Phlex::Rails::Helpers::DOMID
+      include Phlex::Rails::Helpers::ContentFor
 
       if Rails.env.development?
         def before_template
